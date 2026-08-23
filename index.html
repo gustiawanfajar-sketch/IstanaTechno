@@ -486,13 +486,13 @@
                             </div>
                             <div class="overflow-hidden">
                                 <h4 class="font-orbitron font-bold text-sm text-white truncate" id="track-title">
-                                    Sisa Rasa (Cyber Pop Mix)
+                                    Playlist Lagu Spotify 2026 Viral
                                 </h4>
                                 <p class="text-xs text-cyber-cyan truncate mt-0.5" id="track-artist">
-                                    Indo Pop Synthesizer Vibes
+                                    Various Artists
                                 </p>
                                 <p class="text-[10px] text-cyber-muted mt-1 font-mono" id="track-album">
-                                    Album: ISTANA TECHNO Chill Vibes
+                                    Album: Viral TikTok Super Galau
                                 </p>
                             </div>
                         </div>
@@ -540,20 +540,8 @@
                         <div class="text-[10px] font-orbitron text-cyber-muted tracking-wider mb-2 uppercase">Playlist Pop Indonesia Selected:</div>
                         
                         <div onclick="selectTrack(0)" class="playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between">
-                            <span class="truncate">1. Sisa Rasa (Cyber Pop)</span>
+                            <span class="truncate">1. Playlist Lagu Spotify 2026 Viral</span>
                             <i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>
-                        </div>
-                        <div onclick="selectTrack(1)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
-                            <span class="truncate">2. Hati-Hati di Jalan (Synth Mix)</span>
-                            <i class="fa-solid fa-music text-xs opacity-40"></i>
-                        </div>
-                        <div onclick="selectTrack(2)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
-                            <span class="truncate">3. Komang (Lo-Fi Chill Techno)</span>
-                            <i class="fa-solid fa-music text-xs opacity-40"></i>
-                        </div>
-                        <div onclick="selectTrack(3)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
-                            <span class="truncate">4. Melodi Istana Techno (Theme)</span>
-                            <i class="fa-solid fa-music text-xs opacity-40"></i>
                         </div>
                     </div>
 
@@ -962,82 +950,31 @@
         updateClock();
 
         /* -------------------------------------------------------------
-           3. INDONESIAN POP MUSIC PLAYER WIDGET (SYNTH & AUDIO ENGINE)
+           3. INDONESIAN POP MUSIC PLAYER WIDGET (AUDIO ENGINE)
         ------------------------------------------------------------- */
         const playlist = [
             {
-                title: "Sisa Rasa (Cyber Pop)",
-                artist: "Indo Pop Synthesizer Vibes",
-                album: "ISTANA TECHNO Chill Mix",
-                tempo: 100,
-                baseNote: 261.63 // C4
-            },
-            {
-                title: "Hati-Hati di Jalan (Synth Mix)",
-                artist: "Tulus Inspired Synth Wave",
-                album: "Indonesian Pop Remastered",
-                tempo: 110,
-                baseNote: 293.66 // D4
-            },
-            {
-                title: "Komang (Lo-Fi Chill Techno)",
-                artist: "Raim Laode Vibe Synth",
-                album: "Siak Cyber Lounge",
-                tempo: 90,
-                baseNote: 329.63 // E4
-            },
-            {
-                title: "Melodi Istana Techno (Theme)",
-                artist: "Istana Techno Official",
-                album: "Theme Song 2026",
-                tempo: 120,
-                baseNote: 349.23 // F4
+                title: "Playlist Lagu Spotify 2026 Viral",
+                artist: "Various Artists",
+                album: "Viral TikTok Super Galau",
+                file: "ytmp3free.cc_playlist-lagu-spotify-2026-terpopuler-lagu-viral-tiktok-super-galau-youtubemp3free.org.mp3"
             }
         ];
 
         let currentTrackIndex = 0;
         let isPlaying = false;
-        let audioCtx = null;
-        let synthInterval = null;
+        let bgAudio = new Audio(playlist[0].file);
+        bgAudio.loop = true;
+
+        document.getElementById('volume-slider').addEventListener('input', function(e) {
+            bgAudio.volume = e.target.value;
+        });
+
         let visualizerInterval = null;
 
-        function initAudioContext() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function playSynthTone() {
-            if (!audioCtx || audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            if (!isPlaying) return;
-
-            const track = playlist[currentTrackIndex];
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-
-            // Pop Melodic Notes pentatonic pattern
-            const notes = [0, 2, 4, 7, 9, 12, 14];
-            const randomNoteOffset = notes[Math.floor(Math.random() * notes.length)];
-            const freq = track.baseNote * Math.pow(2, randomNoteOffset / 12);
-
-            osc.type = Math.random() > 0.5 ? 'sine' : 'triangle';
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-            const vol = parseFloat(document.getElementById('volume-slider').value) * 0.15;
-            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
-
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.6);
-        }
-
         function togglePlayMusic() {
-            initAudioContext();
+            bgAudio.volume = document.getElementById('volume-slider').value;
+            
             isPlaying = !isPlaying;
 
             const playIcon = document.getElementById('play-icon');
@@ -1048,51 +985,46 @@
                 statusBadge.innerText = "PLAYING";
                 statusBadge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
                 
-                const track = playlist[currentTrackIndex];
-                synthInterval = setInterval(playSynthTone, (60 / track.tempo) * 500);
+                bgAudio.play().catch(e => console.error("Audio playback error:", e));
                 startVisualizerAnimation();
             } else {
                 playIcon.className = "fa-solid fa-play text-sm ml-0.5";
                 statusBadge.innerText = "PAUSED";
                 statusBadge.className = "bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 px-2 py-0.5 rounded text-[10px] font-mono";
                 
-                clearInterval(synthInterval);
+                bgAudio.pause();
                 stopVisualizerAnimation();
             }
         }
 
         function selectTrack(index) {
-            currentTrackIndex = index;
-            const track = playlist[index];
+            currentTrackIndex = 0;
+            const track = playlist[0];
             
             document.getElementById('track-title').innerText = track.title;
             document.getElementById('track-artist').innerText = track.artist;
             document.getElementById('track-album').innerText = "Album: " + track.album;
 
-            // Highlight in playlist UI
             const items = document.querySelectorAll('.playlist-item');
             items.forEach((item, idx) => {
                 if (idx === index) {
                     item.className = "playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between";
+                    item.querySelector('i').className = "fa-solid fa-wave-square text-cyber-pink text-xs";
                 } else {
                     item.className = "playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between";
+                    item.querySelector('i').className = "fa-solid fa-music text-xs opacity-40";
                 }
             });
-
-            if (isPlaying) {
-                clearInterval(synthInterval);
-                synthInterval = setInterval(playSynthTone, (60 / track.tempo) * 500);
-            }
         }
 
         function nextTrack() {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            selectTrack(currentTrackIndex);
+            bgAudio.currentTime = 0;
+            if(!isPlaying) togglePlayMusic();
         }
 
         function prevTrack() {
-            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            selectTrack(currentTrackIndex);
+            bgAudio.currentTime = 0;
+            if(!isPlaying) togglePlayMusic();
         }
 
         function startVisualizerAnimation() {
