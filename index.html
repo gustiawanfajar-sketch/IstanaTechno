@@ -486,13 +486,13 @@
                             </div>
                             <div class="overflow-hidden">
                                 <h4 class="font-orbitron font-bold text-sm text-white truncate" id="track-title">
-                                    Playlist Lagu Spotify 2026 Viral
+                                    Hindia - everything u are
                                 </h4>
                                 <p class="text-xs text-cyber-cyan truncate mt-0.5" id="track-artist">
-                                    Various Artists
+                                    Hindia
                                 </p>
                                 <p class="text-[10px] text-cyber-muted mt-1 font-mono" id="track-album">
-                                    Album: Viral TikTok Super Galau
+                                    Album: Local Indie
                                 </p>
                             </div>
                         </div>
@@ -540,8 +540,12 @@
                         <div class="text-[10px] font-orbitron text-cyber-muted tracking-wider mb-2 uppercase">Playlist Pop Indonesia Selected:</div>
                         
                         <div onclick="selectTrack(0)" class="playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between">
-                            <span class="truncate">1. Playlist Lagu Spotify 2026 Viral</span>
+                            <span class="truncate">1. Hindia - everything u are</span>
                             <i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>
+                        </div>
+                        <div onclick="selectTrack(1)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
+                            <span class="truncate">2. ST12 - Putri Iklan (Cover Aura Band)</span>
+                            <i class="fa-solid fa-music text-xs opacity-40"></i>
                         </div>
                     </div>
 
@@ -954,17 +958,26 @@
         ------------------------------------------------------------- */
         const playlist = [
             {
-                title: "Playlist Lagu Spotify 2026 Viral",
-                artist: "Various Artists",
-                album: "Viral TikTok Super Galau",
-                file: "ytmp3free.cc_playlist-lagu-spotify-2026-terpopuler-lagu-viral-tiktok-super-galau-youtubemp3free.org.mp3"
+                title: "Hindia - everything u are",
+                artist: "Hindia",
+                album: "Local Indie",
+                file: "Hindia - everything u are  Lirik Lagu.mp3"
+            },
+            {
+                title: "ST12 - Putri Iklan (Cover)",
+                artist: "Aura Band x Putri Risma",
+                album: "Cover Song",
+                file: "[COVER] ST12 - PUTRI IKLAN BY. AURA BAND X PUTRI RISMA.mp3"
             }
         ];
 
         let currentTrackIndex = 0;
         let isPlaying = false;
         let bgAudio = new Audio(playlist[0].file);
-        bgAudio.loop = true;
+        
+        bgAudio.addEventListener('ended', function() {
+            nextTrack();
+        });
 
         document.getElementById('volume-slider').addEventListener('input', function(e) {
             bgAudio.volume = e.target.value;
@@ -998,8 +1011,8 @@
         }
 
         function selectTrack(index) {
-            currentTrackIndex = 0;
-            const track = playlist[0];
+            currentTrackIndex = index;
+            const track = playlist[index];
             
             document.getElementById('track-title').innerText = track.title;
             document.getElementById('track-artist').innerText = track.artist;
@@ -1015,15 +1028,23 @@
                     item.querySelector('i').className = "fa-solid fa-music text-xs opacity-40";
                 }
             });
+
+            bgAudio.src = track.file;
+            bgAudio.load();
+            if (isPlaying) {
+                bgAudio.play().catch(e => console.error(e));
+            }
         }
 
         function nextTrack() {
-            bgAudio.currentTime = 0;
+            let nextIndex = (currentTrackIndex + 1) % playlist.length;
+            selectTrack(nextIndex);
             if(!isPlaying) togglePlayMusic();
         }
 
         function prevTrack() {
-            bgAudio.currentTime = 0;
+            let prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            selectTrack(prevIndex);
             if(!isPlaying) togglePlayMusic();
         }
 
