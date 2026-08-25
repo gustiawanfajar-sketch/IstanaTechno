@@ -151,6 +151,14 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 
@@ -158,7 +166,6 @@
 
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Top Futuristic Bar with Clock & Quick Telemetry -->
     <div class="bg-[#05030a] border-b border-cyber-cardBorder py-1.5 px-4 text-xs font-orbitron z-50 relative">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-cyber-muted">
             <div class="flex items-center gap-4">
@@ -378,7 +385,6 @@
 
                         <!-- Live Cyber Chat Simulation -->
                         <div class="space-y-4 font-sans text-xs sm:text-sm">
-                            <!-- User Question -->
                             <div class="flex items-start gap-3 justify-end">
                                 <div class="bg-cyber-purple/30 border border-cyber-purple/50 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%]">
                                     <p class="font-medium">"Laptop saya cepat panas & mendadak mati sendiri saat dipake kerja, kenapa ya min?"</p>
@@ -388,7 +394,6 @@
                                 </div>
                             </div>
 
-                            <!-- Bot/Technician Response -->
                             <div class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-full bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan flex items-center justify-center text-xs font-bold shrink-0">
                                     IT
@@ -443,7 +448,7 @@
                     </div>
 
                     <div class="text-center py-2">
-                        <div class="font-orbitron font-black text-4xl sm:text-5xl text-white glow-text-cyan tracking-widest" id="widget-clock font-mono">
+                        <div class="font-orbitron font-black text-4xl sm:text-5xl text-white glow-text-cyan tracking-widest font-mono" id="widget-clock">
                             00:00:00
                         </div>
                         <div class="text-sm font-semibold text-cyber-purpleLight font-orbitron mt-2" id="widget-date">
@@ -458,18 +463,24 @@
                 </div>
             </div>
 
-            <!-- WIDGET 2: Pemutar Musik Pop Indonesia (Futuristic Cyber Audio Player Widget) -->
+            <!-- WIDGET 2: Pemutar Musik Pop Indonesia (Upgraded HTML5 Audio + Custom MP3 Loader) -->
             <div class="lg:col-span-2 glass-card rounded-2xl p-6 border border-cyber-pink/40 relative overflow-hidden" id="music-player-container">
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyber-cardBorder pb-3 mb-4">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-compact-disc text-cyber-pink text-lg animate-spin" style="animation-duration: 8s;"></i>
                         <span class="font-orbitron text-xs font-bold tracking-wider text-white">
-                            PEMUTAR MUSIK POP INDONESIA <span class="text-cyber-pink font-mono text-[10px] ml-1">[CYBER SOUND]</span>
+                            PEMUTAR MUSIK POP INDONESIA <span class="text-cyber-pink font-mono text-[10px] ml-1">[ONLINE STREAM & LOCAL MP3]</span>
                         </span>
                     </div>
                     <div class="text-xs text-cyber-muted font-sans flex items-center gap-2">
+                        <!-- Custom File Loader Input -->
+                        <label for="local-mp3-upload" class="cursor-pointer bg-cyber-purple/30 hover:bg-cyber-purple text-cyber-purpleLight hover:text-white border border-cyber-purple/50 px-2.5 py-1 rounded text-[10px] font-mono transition flex items-center gap-1">
+                            <i class="fa-solid fa-folder-open text-cyber-cyan"></i> + Putar MP3 Lokal
+                        </label>
+                        <input type="file" id="local-mp3-upload" accept="audio/*" class="hidden" onchange="handleLocalAudioUpload(event)">
+                        
                         <span id="player-status-badge" class="bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 px-2 py-0.5 rounded text-[10px] font-mono">
-                            STANDBY
+                            READY (KLIK PLAY)
                         </span>
                     </div>
                 </div>
@@ -486,13 +497,13 @@
                             </div>
                             <div class="overflow-hidden">
                                 <h4 class="font-orbitron font-bold text-sm text-white truncate" id="track-title">
-                                    Hindia - everything u are
+                                    Hindia - Everything You Are
                                 </h4>
                                 <p class="text-xs text-cyber-cyan truncate mt-0.5" id="track-artist">
                                     Hindia
                                 </p>
                                 <p class="text-[10px] text-cyber-muted mt-1 font-mono" id="track-album">
-                                    Album: Local Indie
+                                    Album: Pop Indie Chill
                                 </p>
                             </div>
                         </div>
@@ -536,15 +547,19 @@
                     </div>
 
                     <!-- Playlist Selector -->
-                    <div class="md:col-span-5 bg-cyber-bg/60 p-3 rounded-xl border border-cyber-cardBorder max-h-44 overflow-y-auto space-y-1 text-xs">
-                        <div class="text-[10px] font-orbitron text-cyber-muted tracking-wider mb-2 uppercase">Playlist Pop Indonesia Selected:</div>
+                    <div class="md:col-span-5 bg-cyber-bg/60 p-3 rounded-xl border border-cyber-cardBorder max-h-44 overflow-y-auto space-y-1 text-xs" id="playlist-container">
+                        <div class="text-[10px] font-orbitron text-cyber-muted tracking-wider mb-2 uppercase">Playlist Pop Ready:</div>
                         
                         <div onclick="selectTrack(0)" class="playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between">
-                            <span class="truncate">1. Hindia - everything u are</span>
+                            <span class="truncate">1. Hindia - Everything You Are</span>
                             <i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>
                         </div>
                         <div onclick="selectTrack(1)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
-                            <span class="truncate">2. ST12 - Putri Iklan (Cover Aura Band)</span>
+                            <span class="truncate">2. ST12 - Putri Iklan (Acoustic Version)</span>
+                            <i class="fa-solid fa-music text-xs opacity-40"></i>
+                        </div>
+                        <div onclick="selectTrack(2)" class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
+                            <span class="truncate">3. Chill Cyber Pop Chillout</span>
                             <i class="fa-solid fa-music text-xs opacity-40"></i>
                         </div>
                     </div>
@@ -591,7 +606,7 @@
                 <button onclick="filterCatalog('Services-PC')" class="cat-pill glass-card text-slate-300 hover:text-white px-4 py-2 rounded-xl whitespace-nowrap transition">Servis PC</button>
             </div>
 
-            <!-- Products Grid & Service Estimator Drawer Sidebar -->
+            <!-- Products Grid & Service Estimator Sidebar -->
             <div class="grid lg:grid-cols-12 gap-8">
                 
                 <!-- Product List (8 Cols) -->
@@ -599,7 +614,7 @@
                     <!-- Dynamic Items loaded via JavaScript -->
                 </div>
 
-                <!-- Estimator / Cart Drawer (4 Cols) -->
+                <!-- Estimator Sidebar (4 Cols) -->
                 <div class="lg:col-span-4">
                     <div class="glass-card rounded-2xl p-5 border border-cyber-cyan/30 sticky top-28 space-y-4 shadow-xl">
                         <div class="flex items-center justify-between border-b border-cyber-cardBorder pb-3">
@@ -800,6 +815,7 @@
 
                 </div>
 
+            </div>
         </div>
     </section>
 
@@ -828,10 +844,8 @@
                 
                 <!-- Map Embed Container (Cyber Styled) -->
                 <div class="w-full h-72 md:h-96 relative bg-[#06040d]">
-                    <!-- Cyber overlay scanlines for aesthetic -->
                     <div class="absolute inset-0 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSJ0cmFuc3BhcmVudCIvPgo8cGF0aCBkPSJNMCAwTDAgNEwyIDRMMiAwWk0yIDBMMiA0TDQgNEw0IDBaIiBmaWxsPSJyZ2JhKDEyNCwgNTgsIDIzNywgMC4wNSkiLz4KPC9zdmc+')] z-10"></div>
                     
-                    <!-- Standard Google Maps Embed Query as Fallback -->
                     <iframe 
                         src="https://maps.google.com/maps?q=Istana+Techno+Siak&t=m&z=16&output=embed&iwloc=near" 
                         width="100%" 
@@ -917,10 +931,17 @@
         </div>
     </footer>
 
+    <div id="cyber-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card px-5 py-3.5 rounded-xl border border-cyber-pink shadow-[0_0_20px_rgba(236,72,153,0.4)] flex items-center gap-3">
+            <i id="toast-icon" class="fa-solid fa-triangle-exclamation text-cyber-pink text-lg"></i>
+            <div>
+                <div id="toast-title" class="font-orbitron font-bold text-xs text-white uppercase">SISTEM NOTIFIKASI</div>
+                <div id="toast-msg" class="text-xs text-slate-300 font-sans mt-0.5">Pesan...</div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        /* -------------------------------------------------------------
-           1. CANVAS PARTICLE CYBER BACKGROUND
-        ------------------------------------------------------------- */
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -975,9 +996,6 @@
         }
         animateParticles();
 
-        /* -------------------------------------------------------------
-           2. LIVE CYBER HUD CLOCK WIDGET
-        ------------------------------------------------------------- */
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -1005,48 +1023,49 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* -------------------------------------------------------------
-           3. INDONESIAN POP MUSIC PLAYER WIDGET (AUDIO ENGINE)
-        ------------------------------------------------------------- */
+        // Updated playlist with reliable CDN audio streams + local upload handler
         const playlist = [
             {
-                title: "Hindia - everything u are",
+                title: "Hindia - Everything You Are",
                 artist: "Hindia",
-                album: "Local Indie",
-                file: "hindia-everything.mp3"
+                album: "Pop Indie Chillout",
+                url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3"
             },
             {
-                title: "ST12 - Putri Iklan (Cover)",
+                title: "ST12 - Putri Iklan (Acoustic Cover)",
                 artist: "Aura Band x Putri Risma",
-                album: "Cover Song",
-                file: "st12-putri-iklan.mp3"
+                album: "Acoustic Pop Session",
+                url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3"
+            },
+            {
+                title: "Cyber Pop Sunset Lounge",
+                artist: "Istana Cyber Sound",
+                album: "Lofi Workstation",
+                url: "https://cdn.pixabay.com/download/audio/2022/10/25/audio_94223f114c.mp3"
             }
         ];
 
         let currentTrackIndex = 0;
         let isPlaying = false;
-        let bgAudio = new Audio(playlist[0].file);
-        
-        // Prevent volume errors on mobile devices
-        try {
-            bgAudio.volume = document.getElementById('volume-slider').value;
-        } catch (e) {
-            console.log("Volume init skipped");
-        }
-        
-        bgAudio.addEventListener('ended', function() {
+        let audioPlayer = new Audio(playlist[0].url);
+        let visualizerInterval = null;
+
+        audioPlayer.volume = 0.7;
+
+        audioPlayer.addEventListener('ended', function() {
             nextTrack();
         });
 
-        document.getElementById('volume-slider').addEventListener('input', function(e) {
-            try {
-                bgAudio.volume = e.target.value;
-            } catch (err) {
-                console.log("Volume control not supported");
+        audioPlayer.addEventListener('error', function(e) {
+            console.warn("Audio load warning:", e);
+            if (isPlaying) {
+                showCyberNotification("Audio eksternal sedang memuat atau koneksi terputus.", "PEMUTAR MUSIK", "warning");
             }
         });
 
-        let visualizerInterval = null;
+        document.getElementById('volume-slider').addEventListener('input', function(e) {
+            audioPlayer.volume = parseFloat(e.target.value);
+        });
 
         function togglePlayMusic() {
             isPlaying = !isPlaying;
@@ -1059,21 +1078,23 @@
                 statusBadge.innerText = "PLAYING";
                 statusBadge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
                 
-                bgAudio.play().catch(e => {
-                    console.error("Audio playback error:", e);
-                    // Reset if play fails (e.g., due to file not found)
+                audioPlayer.play().then(() => {
+                    startVisualizerAnimation();
+                    showCyberNotification("Memutar: " + playlist[currentTrackIndex].title, "PEMUTAR MUSIK", "success");
+                }).catch(err => {
+                    console.error("Playback block/error:", err);
                     isPlaying = false;
                     playIcon.className = "fa-solid fa-play text-sm ml-0.5";
                     statusBadge.innerText = "ERROR";
                     statusBadge.className = "bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
+                    showCyberNotification("Gagal memutar audio. Coba klik 'Putar MP3 Lokal' untuk file sendiri.", "PUTAR GAGAL", "error");
                 });
-                startVisualizerAnimation();
             } else {
                 playIcon.className = "fa-solid fa-play text-sm ml-0.5";
                 statusBadge.innerText = "PAUSED";
                 statusBadge.className = "bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 px-2 py-0.5 rounded text-[10px] font-mono";
                 
-                bgAudio.pause();
+                audioPlayer.pause();
                 stopVisualizerAnimation();
             }
         }
@@ -1097,33 +1118,68 @@
                 }
             });
 
-            bgAudio.src = track.file;
-            bgAudio.load();
+            audioPlayer.src = track.url;
+            audioPlayer.load();
+
             if (isPlaying) {
-                bgAudio.play().catch(e => console.error(e));
+                audioPlayer.play().then(() => {
+                    startVisualizerAnimation();
+                }).catch(() => {});
             }
         }
 
         function nextTrack() {
             let nextIndex = (currentTrackIndex + 1) % playlist.length;
             selectTrack(nextIndex);
-            if(!isPlaying) togglePlayMusic();
+            if (!isPlaying) togglePlayMusic();
         }
 
         function prevTrack() {
             let prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
             selectTrack(prevIndex);
-            if(!isPlaying) togglePlayMusic();
+            if (!isPlaying) togglePlayMusic();
+        }
+
+        /* Allow user to upload local MP3 directly */
+        function handleLocalAudioUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const objectUrl = URL.createObjectURL(file);
+                
+                const customTrack = {
+                    title: file.name.replace(/\.[^/.]+$/, ""),
+                    artist: "Local Device File",
+                    album: "Custom MP3 Upload",
+                    url: objectUrl
+                };
+
+                playlist.unshift(customTrack);
+                
+                // Update playlist UI
+                const container = document.getElementById('playlist-container');
+                const newElem = document.createElement('div');
+                newElem.onclick = () => selectTrack(0);
+                newElem.className = "playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between";
+                newElem.innerHTML = `<span class="truncate">★ ${customTrack.title}</span><i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>`;
+                
+                container.insertBefore(newElem, container.children[1]);
+
+                selectTrack(0);
+                if (!isPlaying) togglePlayMusic();
+                
+                showCyberNotification(`File MP3 "${customTrack.title}" berhasil dimuat!`, "BERHASIL DIUNGGAH", "success");
+            }
         }
 
         function startVisualizerAnimation() {
             const bars = document.querySelectorAll('#visualizer-bars div');
+            clearInterval(visualizerInterval);
             visualizerInterval = setInterval(() => {
                 bars.forEach(bar => {
                     const randomHeight = Math.floor(Math.random() * 24) + 4;
                     bar.style.height = `${randomHeight}px`;
                 });
-            }, 150);
+            }, 120);
         }
 
         function stopVisualizerAnimation() {
@@ -1138,9 +1194,6 @@
             document.getElementById('music-player-container').scrollIntoView({ behavior: 'smooth' });
         });
 
-        /* -------------------------------------------------------------
-           4. CATALOG & SERVICE ESTIMATOR CART LOGIC
-        ------------------------------------------------------------- */
         const catalogData = [
             { id: 'ssd-1', name: 'SSD NVMe 512GB Kingston NV2 PCIe 4.0', category: 'SSD', price: 580000, icon: 'fa-memory' },
             { id: 'ssd-2', name: 'SSD M.2 NVMe 1TB Samsung 980 EVO', category: 'SSD', price: 1250000, icon: 'fa-memory' },
@@ -1165,7 +1218,6 @@
         function filterCatalog(category) {
             activeCategory = category;
             
-            // Update active pill styling
             const pills = document.querySelectorAll('.cat-pill');
             pills.forEach(pill => {
                 if (pill.innerText.toLowerCase().includes(category.toLowerCase()) || (category === 'All' && pill.innerText === 'Semua')) {
@@ -1230,6 +1282,7 @@
             if (item) {
                 selectedCart.push(item);
                 updateCartUI();
+                showCyberNotification(`" ${item.name} " ditambahkan ke rincian estimasi!`, "ITEM DITAMBAHKAN", "success");
             }
         }
 
@@ -1256,7 +1309,7 @@
             }
 
             cartList.innerHTML = '';
-            let total = 50000; // Base service fee
+            let total = 50000;
 
             selectedCart.forEach((item, idx) => {
                 total += item.price;
@@ -1279,7 +1332,7 @@
 
         function checkoutViaWhatsApp() {
             if (selectedCart.length === 0) {
-                alert("Silakan pilih minimal 1 item/jasa sparepart terlebih dahulu untuk perkiraan biaya!");
+                showCyberNotification("Silakan pilih minimal 1 item/jasa sparepart terlebih dahulu untuk estimasi!", "ESTIMASI KOSONG", "warning");
                 return;
             }
 
@@ -1295,9 +1348,6 @@
 
         renderCatalog();
 
-        /* -------------------------------------------------------------
-           5. REPAIR TICKET LOOKUP SIMULATOR
-        ------------------------------------------------------------- */
         const mockTickets = {
             'IT-8821': {
                 device: 'Asus ROG Strix G15',
@@ -1327,7 +1377,7 @@
             const resultBox = document.getElementById('ticket-result');
 
             if (!input) {
-                alert("Silakan masukkan Kode Tiket perbaikan Anda.");
+                showCyberNotification("Silakan masukkan Kode Tiket perbaikan Anda (contoh: IT-8821).", "PERINGATAN", "warning");
                 return;
             }
 
@@ -1344,6 +1394,7 @@
                 const badge = document.getElementById('ticket-status-badge');
                 badge.innerText = data.status;
                 badge.className = `border px-2 py-0.5 rounded text-[10px] ${data.color}`;
+                showCyberNotification(`Tiket ${input} ditemukan dalam database!`, "TIKET DITEMUKAN", "success");
             } else {
                 document.getElementById('ticket-id-display').innerText = input;
                 document.getElementById('ticket-device').innerText = "Laptop / Desktop Customer";
@@ -1354,15 +1405,41 @@
                 const badge = document.getElementById('ticket-status-badge');
                 badge.innerText = "PROSES DIAGNOSIS";
                 badge.className = "bg-cyber-purple/30 text-cyber-purpleLight border border-cyber-purple/50 px-2 py-0.5 rounded text-[10px]";
+                showCyberNotification(`Tiket ${input} berada dalam status antrean diagnosis lab.`, "STATUS TIKET", "warning");
             }
         }
 
-        /* -------------------------------------------------------------
-           6. HERO DIAGNOSIS INPUT HANDLER
-        ------------------------------------------------------------- */
+        /* Custom Toast Notification System */
+        function showCyberNotification(message, title = "SISTEM NOTIFIKASI", type = "warning") {
+            const toast = document.getElementById('cyber-toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastTitle = document.getElementById('toast-title');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastTitle.innerText = title;
+            toastMsg.innerText = message;
+            
+            if (type === 'error') {
+                toastIcon.className = "fa-solid fa-circle-xmark text-red-400 text-lg";
+            } else if (type === 'success') {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+            } else {
+                toastIcon.className = "fa-solid fa-triangle-exclamation text-cyber-pink text-lg";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 4000);
+        }
+
         function handleHeroDiagnose() {
             const input = document.getElementById('hero-quick-input').value.trim();
-            if (!input) return;
+            if (!input) {
+                showCyberNotification("Silakan ketik keluhan laptop/komputer Anda terlebih dahulu.", "INFO DIAGNOSIS", "warning");
+                return;
+            }
 
             const targetMsg = `Halo Istana Techno, laptop/komputer saya mengalami kendala: "${input}". Mohon info estimasi perbaikan.`;
             window.open(`https://wa.me/6282297288018?text=${encodeURIComponent(targetMsg)}`, '_blank');
