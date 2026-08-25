@@ -800,6 +800,58 @@
 
                 </div>
 
+        </div>
+    </section>
+
+    <section id="location-section" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-2xl border border-cyber-purple/40 overflow-hidden relative shadow-[0_0_30px_rgba(124,58,237,0.15)]">
+                
+                <!-- Location Header -->
+                <div class="p-6 md:p-8 border-b border-cyber-cardBorder bg-cyber-bg/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 relative z-10">
+                    <div>
+                        <div class="text-cyber-cyan font-orbitron text-[10px] font-bold tracking-widest uppercase mb-1 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyber-pink animate-pulse"></span> HEADQUARTERS
+                        </div>
+                        <h2 class="font-orbitron font-extrabold text-2xl md:text-3xl text-white flex items-center gap-3 glow-text-purple">
+                            <i class="fa-solid fa-location-crosshairs text-cyber-purpleLight"></i> LOKASI KAMI
+                        </h2>
+                        <p class="text-cyber-muted text-sm mt-2 font-sans max-w-lg">
+                            Kunjungi Istana Techno secara langsung untuk perbaikan perangkat, konsultasi PC rakitan, dan pembelian suku cadang komputer.
+                        </p>
+                    </div>
+                    
+                    <a href="https://share.google/vOrQoAFnRFZJMyJj6" target="_blank" class="cyber-btn px-6 py-3.5 rounded-xl font-orbitron text-xs font-bold text-white flex items-center gap-3 shrink-0 group">
+                        <i class="fa-solid fa-map-location-dot text-cyber-cyan group-hover:animate-bounce"></i> BUKA GOOGLE MAPS
+                    </a>
+                </div>
+                
+                <!-- Map Embed Container (Cyber Styled) -->
+                <div class="w-full h-72 md:h-96 relative bg-[#06040d]">
+                    <!-- Cyber overlay scanlines for aesthetic -->
+                    <div class="absolute inset-0 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSJ0cmFuc3BhcmVudCIvPgo8cGF0aCBkPSJNMCAwTDAgNEwyIDRMMiAwWk0yIDBMMiA0TDQgNEw0IDBaIiBmaWxsPSJyZ2JhKDEyNCwgNTgsIDIzNywgMC4wNSkiLz4KPC9zdmc+')] z-10"></div>
+                    
+                    <!-- Standard Google Maps Embed Query as Fallback -->
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Istana+Techno+Siak&t=m&z=16&output=embed&iwloc=near" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        class="absolute inset-0 w-full h-full grayscale-[80%] contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 z-0">
+                    </iframe>
+                </div>
+
+                <!-- Footer details inside location card -->
+                <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-cyber-cardBorder border-t border-cyber-cardBorder bg-cyber-bg/80 text-center font-orbitron text-[10px] md:text-xs">
+                    <div class="p-3 text-cyber-muted hover:text-white transition"><i class="fa-solid fa-car text-cyber-cyan mb-1 text-sm block"></i> Parkir Tersedia</div>
+                    <div class="p-3 text-cyber-muted hover:text-white transition"><i class="fa-solid fa-snowflake text-cyber-cyan mb-1 text-sm block"></i> Ruang Ber-AC</div>
+                    <div class="p-3 text-cyber-muted hover:text-white transition"><i class="fa-solid fa-wifi text-cyber-cyan mb-1 text-sm block"></i> Free Wi-Fi</div>
+                    <div class="p-3 text-cyber-muted hover:text-white transition"><i class="fa-solid fa-mug-hot text-cyber-cyan mb-1 text-sm block"></i> Ruang Tunggu Nyaman</div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -975,19 +1027,28 @@
         let isPlaying = false;
         let bgAudio = new Audio(playlist[0].file);
         
+        // Prevent volume errors on mobile devices
+        try {
+            bgAudio.volume = document.getElementById('volume-slider').value;
+        } catch (e) {
+            console.log("Volume init skipped");
+        }
+        
         bgAudio.addEventListener('ended', function() {
             nextTrack();
         });
 
         document.getElementById('volume-slider').addEventListener('input', function(e) {
-            bgAudio.volume = e.target.value;
+            try {
+                bgAudio.volume = e.target.value;
+            } catch (err) {
+                console.log("Volume control not supported");
+            }
         });
 
         let visualizerInterval = null;
 
         function togglePlayMusic() {
-            bgAudio.volume = document.getElementById('volume-slider').value;
-            
             isPlaying = !isPlaying;
 
             const playIcon = document.getElementById('play-icon');
@@ -998,7 +1059,14 @@
                 statusBadge.innerText = "PLAYING";
                 statusBadge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
                 
-                bgAudio.play().catch(e => console.error("Audio playback error:", e));
+                bgAudio.play().catch(e => {
+                    console.error("Audio playback error:", e);
+                    // Reset if play fails (e.g., due to file not found)
+                    isPlaying = false;
+                    playIcon.className = "fa-solid fa-play text-sm ml-0.5";
+                    statusBadge.innerText = "ERROR";
+                    statusBadge.className = "bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
+                });
                 startVisualizerAnimation();
             } else {
                 playIcon.className = "fa-solid fa-play text-sm ml-0.5";
