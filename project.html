@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Proyek & Portofolio | ISTANA TECHNO</title>
+    <meta name="description"
+        content="Jelajahi koleksi proyek web, aplikasi mobile, game, e-commerce, dan solusi teknologi modern oleh ISTANA TECHNO.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Orbitron & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#080511',
+                            card: '#120b24',
+                            cardBorder: '#2a1a4a',
+                            purple: '#7c3aed',
+                            purpleLight: '#a78bfa',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899',
+                            neon: '#a855f7',
+                            text: '#f3f4f6',
+                            muted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                        'scanline': 'scanline 4s linear infinite',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(124, 58, 237, 0.4), 0 0 30px rgba(6, 182, 212, 0.2)' },
+                            '50%': { boxShadow: '0 0 25px rgba(124, 58, 237, 0.8), 0 0 50px rgba(6, 182, 212, 0.5)' }
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(1000%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #06040d;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+
+        /* Holographic Grid Background */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(18, 11, 36, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.25);
+        }
+
+        /* Glowing text effects */
+        .glow-text-purple {
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.8), 0 0 20px rgba(124, 58, 237, 0.6);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.8), 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #080511;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a1a4a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+
+        /* Cyber Button Glow */
+        .cyber-btn {
+            position: relative;
+            background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
+            transition: all 0.3s ease;
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(90deg, #06b6d4, #ec4899, #7c3aed);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .cyber-btn:hover::before {
+            opacity: 1;
+        }
+
+        .cyber-btn:hover {
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.6), 0 0 35px rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Canvas Particle Layer */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Filter pill active state */
+        .filter-btn.active {
+            background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+            color: #ffffff;
+            border-color: #06b6d4;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Project Card Glow on hover */
+        .project-card {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 12px 30px -5px rgba(124, 58, 237, 0.3), 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .project-img-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(18, 11, 36, 0.95) 0%, rgba(18, 11, 36, 0.2) 60%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Modal backdrop transition */
+        .modal-fade-in {
+            animation: fadeInModal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-cyber-text bg-cyber-bg relative selection:bg-cyber-purple selection:text-white">
+
+    <!-- Interactive Canvas Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Top Status Bar HUD -->
+    <div class="bg-[#05030a] border-b border-cyber-cardBorder py-1.5 px-4 text-xs font-orbitron z-50 relative">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-cyber-muted">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5 text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    SYSTEM ONLINE
+                </span>
+                <span class="hidden sm:inline text-cyber-muted">|</span>
+                <span class="hidden sm:inline"><i class="fa-solid fa-code-fork text-cyber-cyan mr-1"></i> PORTFOLIO &
+                    REPO MATRIX</span>
+                <span class="hidden md:inline text-cyber-muted">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-shield-halved text-cyber-purpleLight mr-1"></i>
+                    RESMI & TERVERIFIKASI</span>
+            </div>
+
+            <!-- Live Clock Widget Header Brief -->
+            <div class="flex items-center gap-3 ml-auto">
+                <div class="bg-cyber-card/80 px-2.5 py-0.5 rounded border border-cyber-purple/30 text-cyber-cyan font-bold"
+                    id="top-clock-display">
+                    00:00:00 WIB
+                </div>
+                <div class="hidden lg:block text-slate-400" id="top-date-display">
+                    Senin, 01 Jan 2026
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav
+        class="sticky top-0 z-40 bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-cardBorder transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-cyan p-0.5 shadow-[0_0_15px_rgba(124,58,237,0.5)] group-hover:scale-105 transition duration-300">
+                        <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center">
+                            <i
+                                class="fa-solid fa-laptop-code text-xl text-cyber-cyan group-hover:text-cyber-purpleLight transition"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span
+                            class="font-orbitron text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-cyber-purpleLight to-cyber-cyan bg-clip-text text-transparent block">
+                            ISTANA TECHNO
+                        </span>
+                        <span class="text-[10px] font-orbitron tracking-widest text-cyber-cyan block -mt-1 uppercase">
+                            Spare Part & Services
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden lg:flex items-center space-x-1 font-medium text-sm">
+                    <a href="index.html"
+                        class="px-3 py-2 text-cyber-text hover:text-cyber-cyan transition font-orbitron text-xs tracking-wider">
+                        BERANDA
+                    </a>
+
+                    <!-- Storage Dropdown -->
+                    <div class="relative group px-2 py-2">
+                        <button
+                            class="text-cyber-text hover:text-cyber-cyan transition flex items-center gap-1 font-orbitron text-xs tracking-wider">
+                            STORAGE <i
+                                class="fa-solid fa-chevron-down text-[10px] group-hover:rotate-180 transition duration-300"></i>
+                        </button>
+                        <div
+                            class="absolute top-full left-0 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2">
+                            <div class="glass-card rounded-xl p-2 shadow-2xl border border-cyber-purple/40">
+                                <a href="index.html#catalog-section"
+                                    class="block px-3 py-2 rounded-lg text-xs hover:bg-cyber-purple/20 hover:text-cyber-cyan transition">
+                                    <i class="fa-solid fa-hard-drive mr-2 text-cyber-purpleLight"></i> Harddisk (HDD)
+                                </a>
+                                <a href="index.html#catalog-section"
+                                    class="block px-3 py-2 rounded-lg text-xs hover:bg-cyber-purple/20 hover:text-cyber-cyan transition">
+                                    <i class="fa-solid fa-memory mr-2 text-cyber-cyan"></i> Solid State (SSD)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#catalog-section"
+                        class="px-3 py-2 text-cyber-text hover:text-cyber-cyan transition font-orbitron text-xs tracking-wider">RAM</a>
+                    <a href="index.html#catalog-section"
+                        class="px-3 py-2 text-cyber-text hover:text-cyber-cyan transition font-orbitron text-xs tracking-wider">PROCESSOR</a>
+                    <a href="index.html#catalog-section"
+                        class="px-3 py-2 text-cyber-text hover:text-cyber-cyan transition font-orbitron text-xs tracking-wider">VGA</a>
+                    <a href="index.html#catalog-section"
+                        class="px-3 py-2 text-cyber-text hover:text-cyber-cyan transition font-orbitron text-xs tracking-wider">SERVICES</a>
+
+                    <!-- ACTIVE PAGE: PROJECT -->
+                    <a href="project.html"
+                        class="px-3.5 py-1.5 rounded-lg bg-cyber-purple/20 border border-cyber-cyan/40 text-cyber-cyan font-orbitron text-xs tracking-wider font-bold shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                        <i class="fa-solid fa-cubes-stacked mr-1"></i> PROJECT
+                    </a>
+                </div>
+
+                <!-- Actions Right (Music Player & WhatsApp CTA) -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button id="toggle-music-widget"
+                        class="p-2.5 rounded-xl glass-card text-cyber-pink hover:text-white hover:border-cyber-pink transition relative group"
+                        title="Buka Pemutar Musik">
+                        <i class="fa-solid fa-music text-lg group-hover:scale-110 transition duration-200"></i>
+                        <span
+                            class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cyber-pink rounded-full animate-ping"></span>
+                    </button>
+
+                    <a href="https://wa.me/6282297288018?text=Halo%20Istana%20Techno%2C%20saya%20tertarik%20dengan%20proyek%20dan%20layanan%20Anda."
+                        target="_blank"
+                        class="cyber-btn px-5 py-2.5 rounded-xl font-orbitron text-xs font-bold tracking-wider text-white flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i> KONSULTASI
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <button id="mobile-music-btn" class="p-2 rounded-lg glass-card text-cyber-pink mr-1">
+                        <i class="fa-solid fa-music"></i>
+                    </button>
+                    <button id="mobile-menu-btn"
+                        class="p-2 rounded-lg glass-card text-cyber-text hover:text-cyber-cyan">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden border-t border-cyber-cardBorder bg-cyber-bg/95 p-4 space-y-3 font-orbitron text-xs">
+            <a href="index.html" class="block py-2 px-3 rounded hover:bg-cyber-purple/20 text-slate-300">
+                <i class="fa-solid fa-house mr-2 text-cyber-purpleLight"></i> Beranda Utama
+            </a>
+            <a href="project.html"
+                class="block py-2 px-3 rounded bg-cyber-purple/30 border border-cyber-cyan/40 text-cyber-cyan font-bold">
+                <i class="fa-solid fa-cubes-stacked mr-2"></i> Katalog Proyek (Active)
+            </a>
+            <div class="grid grid-cols-2 gap-2 text-cyber-muted pt-2 border-t border-cyber-cardBorder">
+                <a href="index.html#catalog-section" class="py-1.5 px-2 hover:text-white"><i
+                        class="fa-solid fa-microchip mr-1"></i> Sparepart PC</a>
+                <a href="index.html#catalog-section" class="py-1.5 px-2 hover:text-white"><i
+                        class="fa-solid fa-screwdriver-wrench mr-1"></i> Servis Laptop</a>
+                <a href="index.html#tracker-section" class="py-1.5 px-2 hover:text-white"><i
+                        class="fa-solid fa-magnifying-glass-location mr-1"></i> Lacak Tiket</a>
+                <a href="index.html#lead-form-section" class="py-1.5 px-2 hover:text-white"><i
+                        class="fa-solid fa-envelope mr-1"></i> Konsultasi</a>
+            </div>
+            <a href="https://wa.me/6282297288018" target="_blank"
+                class="block text-center py-3 bg-cyber-purple rounded-xl font-bold text-white mt-2">
+                Hubungi Teknisi via WhatsApp
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Header Section -->
+    <header class="relative pt-12 pb-14 md:pt-16 md:pb-20 overflow-hidden cyber-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+
+                <!-- Decorative Top Tagline -->
+                <div class="flex items-center justify-center gap-3">
+                    <div class="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-cyber-cyan"></div>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-card border border-cyber-cyan/40 text-[11px] font-orbitron font-bold text-cyber-cyan tracking-[0.2em] uppercase">
+                        <i class="fa-solid fa-code text-cyber-pink"></i> SEMUA PROYEK & KARYA
+                    </span>
+                    <div class="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-cyber-cyan"></div>
+                </div>
+
+                <!-- Main Title -->
+                <h1
+                    class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-orbitron leading-tight tracking-tight text-white">
+                    <span
+                        class="bg-gradient-to-r from-cyber-cyan via-cyber-purpleLight to-cyber-pink bg-clip-text text-transparent glow-text-purple">
+                        PORTOFOLIO LENGKAP
+                    </span>
+                </h1>
+
+                <!-- Subtitle Description -->
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-sans max-w-2xl mx-auto">
+                    Jelajahi, cari, dan filter koleksi proyek pengembangan sistem web, aplikasi mobile, game
+                    development, e-commerce, dan inovasi teknologi terkini.
+                </p>
+
+                <!-- Stats Quick Metrics HUD -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 max-w-2xl mx-auto">
+                    <div class="glass-card p-3 rounded-xl border border-cyber-purple/40 text-center">
+                        <div class="font-orbitron font-black text-xl text-cyber-cyan" id="stat-total-projects">17</div>
+                        <div class="text-[11px] text-cyber-muted uppercase font-sans">Total Proyek</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-cyber-purple/40 text-center">
+                        <div class="font-orbitron font-black text-xl text-cyber-purpleLight">6+</div>
+                        <div class="text-[11px] text-cyber-muted uppercase font-sans">Kategori</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-cyber-purple/40 text-center">
+                        <div class="font-orbitron font-black text-xl text-emerald-400">14</div>
+                        <div class="text-[11px] text-cyber-muted uppercase font-sans">Live Production</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl border border-cyber-purple/40 text-center">
+                        <div class="font-orbitron font-black text-xl text-cyber-pink">100%</div>
+                        <div class="text-[11px] text-cyber-muted uppercase font-sans">Verified Works</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Search & Filter Controls Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 relative z-30">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-cyber-purple/40 space-y-5">
+
+            <!-- Search Bar Wrapper -->
+            <div class="relative">
+                <div class="relative flex items-center">
+                    <div class="absolute left-4 pointer-events-none text-cyber-cyan">
+                        <i class="fa-solid fa-magnifying-glass text-base"></i>
+                    </div>
+                    <input type="text" id="project-search-input"
+                        placeholder="Cari proyek berdasarkan judul, deskripsi, teknologi (contoh: SISPOL, Mobile, Game, Laravel)..."
+                        class="w-full bg-[#090514] border border-cyber-cardBorder hover:border-cyber-purpleLight focus:border-cyber-cyan text-white pl-12 pr-12 py-3.5 rounded-xl font-sans text-sm outline-none transition-all duration-300 shadow-inner focus:shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+
+                    <button id="clear-search-btn" onclick="clearSearch()"
+                        class="absolute right-4 text-cyber-muted hover:text-white p-1 transition hidden"
+                        title="Hapus pencarian">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Pills / Categories Tabs -->
+            <div class="flex items-center justify-between flex-wrap gap-3">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 max-w-full no-scrollbar"
+                    id="category-pill-list">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- Result Counter -->
+                <div class="text-xs font-mono text-cyber-muted ml-auto shrink-0 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span>
+                    <span id="projects-count-display">Memuat proyek...</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Grid Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-20 min-h-[400px]">
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Project Cards Rendered via JS -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="empty-state-container"
+            class="hidden text-center py-20 glass-card rounded-2xl border border-cyber-cardBorder max-w-xl mx-auto p-8 space-y-4">
+            <div
+                class="w-16 h-16 rounded-full bg-cyber-purple/20 border border-cyber-purple/40 text-cyber-cyan flex items-center justify-center mx-auto text-2xl animate-float">
+                <i class="fa-solid fa-ghost"></i>
+            </div>
+            <h3 class="font-orbitron text-xl font-bold text-white">Proyek Tidak Ditemukan</h3>
+            <p class="text-cyber-muted text-sm max-w-md mx-auto">
+                Tidak ada proyek yang sesuai dengan kata kunci pencarian atau kategori filter Anda. Coba kata kunci lain
+                atau setel ulang filter.
+            </p>
+            <button onclick="resetFilters()"
+                class="cyber-btn px-6 py-2.5 rounded-xl font-orbitron text-xs font-bold text-white inline-flex items-center gap-2 mt-2">
+                <i class="fa-solid fa-arrow-rotate-left text-cyber-cyan"></i> Atur Ulang Filter
+            </button>
+        </div>
+    </main>
+
+    <!-- Floating / Embedded Music Player Widget Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-30" id="music-player-container">
+        <div class="glass-card rounded-2xl p-6 border border-cyber-pink/40 relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyber-cardBorder pb-3 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-compact-disc text-cyber-pink text-lg animate-spin"
+                        style="animation-duration: 8s;"></i>
+                    <span class="font-orbitron text-xs font-bold tracking-wider text-white">
+                        PEMUTAR MUSIK POP INDONESIA <span class="text-cyber-pink font-mono text-[10px] ml-1">[ONLINE &
+                            LOCAL MP3]</span>
+                    </span>
+                </div>
+                <div class="text-xs text-cyber-muted font-sans flex items-center gap-2">
+                    <label for="local-mp3-upload"
+                        class="cursor-pointer bg-cyber-purple/30 hover:bg-cyber-purple text-cyber-purpleLight hover:text-white border border-cyber-purple/50 px-2.5 py-1 rounded text-[10px] font-mono transition flex items-center gap-1">
+                        <i class="fa-solid fa-folder-open text-cyber-cyan"></i> + Putar MP3 Lokal
+                    </label>
+                    <input type="file" id="local-mp3-upload" accept="audio/*" class="hidden"
+                        onchange="handleLocalAudioUpload(event)">
+
+                    <span id="player-status-badge"
+                        class="bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 px-2 py-0.5 rounded text-[10px] font-mono">
+                        READY (KLIK PLAY)
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+                <!-- Track Display & Controls -->
+                <div class="md:col-span-7 space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-pink p-0.5 shadow-lg shrink-0">
+                            <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center text-cyber-pink font-bold text-xl"
+                                id="track-cover-icon">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="font-orbitron font-bold text-sm text-white truncate" id="track-title">
+                                Hindia - Everything You Are
+                            </h4>
+                            <p class="text-xs text-cyber-muted font-sans" id="track-artist">Hindia</p>
+                            <p class="text-[10px] text-cyber-purpleLight font-mono mt-0.5" id="track-album">Album: Pop
+                                Indie Chillout</p>
+                        </div>
+                    </div>
+
+                    <!-- Cyber Visualizer Simulation & Controls -->
+                    <div class="flex items-center justify-between gap-4 pt-1">
+                        <div class="flex items-center gap-3">
+                            <button onclick="prevTrack()"
+                                class="w-9 h-9 rounded-lg glass-card hover:bg-cyber-purple/30 text-slate-300 hover:text-white flex items-center justify-center transition">
+                                <i class="fa-solid fa-backward-step text-xs"></i>
+                            </button>
+                            <button onclick="togglePlayMusic()" id="play-btn"
+                                class="w-11 h-11 rounded-xl bg-gradient-to-r from-cyber-purple to-cyber-pink text-white flex items-center justify-center shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:scale-105 transition">
+                                <i class="fa-solid fa-play text-sm ml-0.5" id="play-icon"></i>
+                            </button>
+                            <button onclick="nextTrack()"
+                                class="w-9 h-9 rounded-lg glass-card hover:bg-cyber-purple/30 text-slate-300 hover:text-white flex items-center justify-center transition">
+                                <i class="fa-solid fa-forward-step text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Equalizer Visualizer Bars -->
+                        <div class="flex items-end gap-1 h-6 px-3 bg-cyber-bg/60 rounded-lg border border-cyber-cardBorder"
+                            id="visualizer-bars">
+                            <div class="w-1 bg-cyber-pink rounded-t h-1.5 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-cyan rounded-t h-2 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-purpleLight rounded-t h-3 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-pink rounded-t h-2.5 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-cyan rounded-t h-1.5 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-purple rounded-t h-2 transition-all duration-100"></div>
+                            <div class="w-1 bg-cyber-pink rounded-t h-3.5 transition-all duration-100"></div>
+                        </div>
+
+                        <!-- Volume -->
+                        <div class="hidden sm:flex items-center gap-2 text-cyber-muted text-xs">
+                            <i class="fa-solid fa-volume-high text-cyber-cyan text-xs"></i>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.7"
+                                class="w-20 accent-cyber-pink bg-cyber-bg rounded h-1 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playlist Items -->
+                <div class="md:col-span-5 bg-cyber-bg/80 rounded-xl p-3 border border-cyber-cardBorder text-xs space-y-1.5 max-h-40 overflow-y-auto"
+                    id="playlist-container">
+                    <div class="text-[10px] font-orbitron text-cyber-muted uppercase px-1 pb-1">DAFTAR PUTAR TERSEDIA
+                    </div>
+
+                    <div onclick="selectTrack(0)"
+                        class="playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between">
+                        <span class="truncate">1. Hindia - Everything You Are</span>
+                        <i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>
+                    </div>
+                    <div onclick="selectTrack(1)"
+                        class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
+                        <span class="truncate">2. ST12 - Putri Iklan (Acoustic)</span>
+                        <i class="fa-solid fa-music text-xs opacity-40"></i>
+                    </div>
+                    <div onclick="selectTrack(2)"
+                        class="playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between">
+                        <span class="truncate">3. Backstreet Boys - Shape of My Heart</span>
+                        <i class="fa-solid fa-music text-xs opacity-40"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal Lightbox with Social Media Style Carousel -->
+    <div id="project-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card bg-[#0e071e] rounded-2xl border border-cyber-cyan/50 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-[0_0_50px_rgba(6,182,212,0.3)] relative p-5 sm:p-7 space-y-5 transform transition-transform duration-300 scale-95"
+            id="project-modal-card">
+
+            <!-- Close Button -->
+            <button onclick="closeProjectModal()"
+                class="absolute top-4 right-4 text-cyber-muted hover:text-white p-2.5 rounded-xl glass-card hover:border-red-400 hover:text-red-400 transition z-30 shadow-lg"
+                title="Tutup Modal (ESC)">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Content Header -->
+            <div class="flex items-center gap-2 text-xs font-orbitron text-cyber-cyan uppercase tracking-wider pr-12">
+                <span id="modal-category-badge"
+                    class="bg-cyber-purple/40 border border-cyber-purple px-2.5 py-1 rounded-md text-white font-bold">Servis
+                    & Hardware</span>
+                <span id="modal-status-badge"
+                    class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] font-mono">SELESAI</span>
+            </div>
+
+            <!-- Modal Title -->
+            <h2 id="modal-title" class="font-orbitron font-extrabold text-xl sm:text-2xl text-white leading-tight">
+                Project Title</h2>
+
+            <!-- Social Media-Style Interactive Image Slider Container (Full View / Contain) -->
+            <div class="relative rounded-2xl overflow-hidden border border-cyber-purple/50 bg-[#06030e] select-none shadow-2xl group/slider"
+                id="modal-slider-wrapper">
+
+                <!-- Main Image Stage (Full Display Aspect Fit) -->
+                <div class="w-full h-72 sm:h-96 md:h-[430px] flex items-center justify-center relative p-1 bg-black/40 overflow-hidden"
+                    id="modal-image-container">
+                    <img id="modal-img" src="" alt="Preview"
+                        class="w-full h-full object-contain transition-all duration-300">
+
+                    <!-- Fallback UI -->
+                    <div id="modal-img-fallback"
+                        class="hidden absolute inset-0 bg-gradient-to-tr from-[#160d2e] via-[#090514] to-[#1a0f35] flex-col items-center justify-center text-center p-6 space-y-2">
+                        <i class="fa-solid fa-laptop-code text-4xl text-cyber-cyan"></i>
+                        <span class="font-orbitron text-xs text-cyber-purpleLight">PREVIEW MATRIX</span>
+                    </div>
+
+                    <!-- Slide Caption Overlay (Social Media Post Style) -->
+                    <div id="slider-caption-box"
+                        class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent p-3.5 pt-8 text-xs text-slate-200 font-sans flex items-center justify-between gap-3 z-10 transition-opacity duration-200">
+                        <span id="slider-caption-text" class="text-left font-medium line-clamp-2">Caption foto</span>
+                        <span id="slider-index-badge"
+                            class="bg-cyber-purple/60 border border-cyber-cyan/50 text-cyber-cyan font-orbitron font-bold px-2.5 py-0.5 rounded text-[10px] shrink-0">1
+                            / 3</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows (Left & Right) -->
+                <button id="slider-prev-btn" onclick="slideModalPrev(event)"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card bg-black/70 border border-cyber-cyan/50 text-white hover:bg-cyber-cyan hover:text-black hover:scale-110 flex items-center justify-center shadow-xl transition-all duration-200 z-20"
+                    title="Foto Sebelumnya">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button id="slider-next-btn" onclick="slideModalNext(event)"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-card bg-black/70 border border-cyber-cyan/50 text-white hover:bg-cyber-cyan hover:text-black hover:scale-110 flex items-center justify-center shadow-xl transition-all duration-200 z-20"
+                    title="Foto Selanjutnya">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <!-- Top Left Counter Badge -->
+                <div id="slider-top-counter"
+                    class="absolute top-3 left-3 z-20 bg-black/80 backdrop-blur-md border border-cyber-purple/50 px-3 py-1 rounded-full text-[10px] font-orbitron text-cyber-cyan flex items-center gap-1.5 shadow-lg">
+                    <i class="fa-solid fa-images text-cyber-pink"></i>
+                    <span id="slider-counter-label">Slide 1 dari 3</span>
+                </div>
+            </div>
+
+            <!-- Thumbnail Navigator Strip (Clickable mini preview) -->
+            <div id="modal-thumbnail-strip"
+                class="flex items-center justify-center gap-2 overflow-x-auto py-1 no-scrollbar">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Modal Description -->
+            <div class="space-y-2 pt-1">
+                <h4
+                    class="text-xs font-orbitron font-bold text-cyber-purpleLight uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-cyber-cyan"></i> Rincian Pengerjaan
+                </h4>
+                <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed font-sans"></p>
+            </div>
+
+            <!-- Modal Tech Stack -->
+            <div class="space-y-2">
+                <h4
+                    class="text-xs font-orbitron font-bold text-cyber-cyan uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-cyber-purpleLight"></i> Komponen & Layanan
+                </h4>
+                <div id="modal-tech-tags" class="flex flex-wrap gap-1.5">
+                    <!-- Badges -->
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="pt-4 border-t border-cyber-cardBorder flex flex-wrap items-center justify-between gap-3">
+                <div class="text-xs text-cyber-muted font-mono">
+                    <i class="fa-solid fa-shield-check text-emerald-400 mr-1"></i> Terverifikasi oleh Istana Techno
+                </div>
+                <div class="flex items-center gap-3">
+                    <a id="modal-live-btn" href="#" target="_blank"
+                        class="cyber-btn px-5 py-2.5 rounded-xl font-orbitron text-xs font-bold text-white flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i> Konsultasi Servis via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cyber Toast Notification -->
+    <div id="cyber-toast"
+        class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div
+            class="glass-card px-5 py-3.5 rounded-xl border border-cyber-pink shadow-[0_0_20px_rgba(236,72,153,0.4)] flex items-center gap-3">
+            <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+            <div>
+                <div id="toast-title" class="font-orbitron font-bold text-xs text-white uppercase">SISTEM NOTIFIKASI
+                </div>
+                <div id="toast-msg" class="text-xs text-slate-300 font-sans mt-0.5">Pesan...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyber Footer -->
+    <footer class="bg-[#040208] border-t border-cyber-cardBorder pt-12 pb-8 font-sans text-xs relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-cyber-cardBorder">
+
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-cyber-purple p-1 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <span class="font-orbitron text-lg font-bold text-white tracking-wider">ISTANA TECHNO</span>
+                    </div>
+                    <p class="text-cyber-muted leading-relaxed">
+                        Pusat perbaikan komputer, laptop, perakitan custom PC, dan pengembangan sistem teknologi
+                        terdepan di Indonesia.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs tracking-wider">HALAMAN UTAMA</h4>
+                    <ul class="space-y-2 text-cyber-muted">
+                        <li><a href="index.html" class="hover:text-cyber-cyan transition">Beranda Utama</a></li>
+                        <li><a href="project.html" class="text-cyber-cyan font-semibold">Koleksi Proyek</a></li>
+                        <li><a href="index.html#catalog-section" class="hover:text-cyber-cyan transition">Katalog
+                                Sparepart & Hardware</a></li>
+                        <li><a href="index.html#tracker-section" class="hover:text-cyber-cyan transition">Sistem Lacak
+                                Reparasi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Services & Proyek -->
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs tracking-wider">LAYANAN & SOLUSI</h4>
+                    <ul class="space-y-2 text-cyber-muted">
+                        <li><a href="index.html#catalog-section" class="hover:text-cyber-cyan transition">Servis Laptop
+                                Overheat & Thermal Paste</a></li>
+                        <li><a href="index.html#catalog-section" class="hover:text-cyber-cyan transition">Rakit PC
+                                Workstation & Gaming High End</a></li>
+                        <li><a href="project.html" class="hover:text-cyber-cyan transition">Pengembangan Web & Aplikasi
+                                Custom</a></li>
+                        <li><a href="index.html#lead-form-section" class="hover:text-cyber-cyan transition">Konsultasi
+                                Diagnosis Online</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Operational Hours -->
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs tracking-wider">JAM OPERASIONAL</h4>
+                    <div
+                        class="bg-cyber-card p-3 rounded-xl border border-cyber-cardBorder space-y-1.5 text-cyber-muted font-mono">
+                        <div class="flex justify-between"><span>Senin - Jumat:</span><span class="text-white">09:00 -
+                                18:00</span></div>
+                        <div class="flex justify-between"><span>Sabtu:</span><span class="text-white">09:00 -
+                                17:00</span></div>
+                        <div class="flex justify-between text-pink-400"><span>Minggu:</span><span>Tutup / Janji</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-cyber-muted text-[11px]">
+                <p>&copy; 2026 ISTANA TECHNO - Spare Part & Services Computer. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span class="text-cyber-cyan font-mono"><i class="fa-solid fa-shield-halved mr-1"></i> Cyber Secure
+                        System</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Comprehensive Scripts -->
+    <script>
+        // ==========================================
+        // 1. PARTICLE CANVAS ANIMATION
+        // ==========================================
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
+                this.color = Math.random() > 0.5 ? '#7c3aed' : '#06b6d4';
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.alpha;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ==========================================
+        // 2. LIVE CLOCK (WIB)
+        // ==========================================
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeStr = `${hours}:${minutes}:${seconds} WIB`;
+
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+            const dayName = days[now.getDay()];
+            const dayNum = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+
+            document.getElementById('top-clock-display').innerText = timeStr;
+            document.getElementById('top-date-display').innerText = `${dayName}, ${dayNum} ${monthName} ${year}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ==========================================
+        // 3. COMPLETE PROJECTS DATASET
+        // ==========================================
+        const projectsData = [
+            {
+                id: 19,
+                title: "Optimalisasi OS Windows & Pergantian Speaker Laptop Lenovo IdeaPad Slim 3",
+                category: "Servis & Hardware",
+                rawCategory: "servisHardware",
+                image: "./lenovo-ideapad3-performance-optim.jpg",
+                images: [
+                    "./lenovo-ideapad3-performance-optim.jpg",
+                    "./lenovo-ideapad3-fan-cleaning.jpg",
+                    "./lenovo-ideapad3-health-check.jpg"
+                ],
+                imageCaptions: [
+                    "Optimalisasi Performa & Suhu: Sebelum 100% CPU (98°C) vs Sesudah Stabil 1-3% CPU (47°C)",
+                    "Deep Cleaning Fan Heatsink: Sebelum Debu Tebal Tersumbat vs Sesudah Bersih Mengkilap",
+                    "Uji Integritas Windows & SSD: SFC /scannow Berhasil & Kesehatan SSD 99% Prima"
+                ],
+                description: "Pengerjaan servis komprehensif Lenovo IdeaPad Slim 3 (AMD Ryzen 3 3250U): pergantian modul internal speaker baru yang jernih, deep cleaning heatsink & fan dari debu pekat, penggantian thermal paste high-performance, optimalisasi sistem Windows (menurunkan beban CPU dari 100% ke 1-3% & suhu GPU dari 98°C ke 47°C), serta verifikasi integritas sistem (sfc /scannow) dan kesehatan SSD 99% prima.",
+                link: "https://wa.me/6282297288018?text=Halo%20Istana%20Techno%2C%20saya%20mau%20konsultasi%20servis%20laptop%20Lenovo%20IdeaPad%20Slim%203",
+                tech: ["Lenovo IdeaPad Slim 3", "Ganti Speaker Internal", "Optimalisasi Windows 11/10", "Deep Cleaning Fan", "Thermal Repaste (98°C ➔ 47°C)", "Health Check SSD 99%", "SFC Scannow & Malware Clean"],
+                status: "SELESAI (OPTIMAL 100%)",
+                isLocked: false
+            },
+            {
+                id: 18,
+                title: "Perbaikan All-In-One (AIO) PC Lenovo - Penggantian Panel LCD Pecah",
+                category: "Servis & Hardware",
+                rawCategory: "servisHardware",
+                image: "./aio-lenovo-lcd-repair.jpg",
+                images: [
+                    "./aio-lenovo-lcd-repair.jpg"
+                ],
+                imageCaptions: [
+                    "Dokumentasi Before & After: Layar Pecah & Penggantian Panel LCD AIO PC Lenovo"
+                ],
+                description: "Pengerjaan servis unit All-In-One (AIO) PC Lenovo dengan kondisi awal layar pecah dan bergaris-garis vertikal pelangi (rusak fisik/no display). Berhasil dilakukan penggantian unit panel LCD original baru, kalibrasi warna display, deep cleaning kipas pendingin, pembaruan thermal paste, dan uji boot Windows normal bergaransi.",
+                link: "https://wa.me/6282297288018?text=Halo%20Istana%20Techno%2C%20saya%20mau%20konsultasi%20perbaikan%20layar%20AIO%20PC%20Lenovo",
+                tech: ["Lenovo AIO PC", "Ganti Panel LCD", "Layar Pecah", "Hardware Repair", "Thermal Maintenance", "Display Calibration"],
+                status: "SELESAI & BERGARANSI",
+                isLocked: false
+            },
+            {
+                id: 20,
+                title: "Website Resmi Rutan Kelas IIB Siak Sri Indrapura - Kemenimipas RI",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "./rutan-siak-kemenimipas.jpg",
+                images: [
+                    "./rutan-siak-kemenimipas.jpg"
+                ],
+                imageCaptions: [
+                    "Portal Resmi Rumah Tahanan Negara Kelas IIB Siak Sri Indrapura - Kementerian Imigrasi dan Pemasyarakatan RI"
+                ],
+                description: "Pengembangan portal web lembaga pemerintahan resmi untuk Rumah Tahanan Negara Kelas IIB Siak Sri Indrapura di bawah naungan Kementerian Imigrasi dan Pemasyarakatan Republik Indonesia. Dilengkapi fitur antrean online kunjungan tatap muka terintegrasi, transparansi syarat layanan integrasi (PB/CB), portal berita harian/bulanan, galeri kegiatan pembinaan kemandirian WBP, peta interaktif, dan saluran pengaduan masyarakat (WBS).",
+                link: "https://rumahtahanansiak.vercel.app/",
+                tech: ["Kemenimipas RI", "Lembaga Pemerintah", "Sistem Antrean Online", "Tailwind CSS", "JavaScript ES6", "Vercel Production"],
+                status: "LIVE PRODUCTION",
+                isLocked: false
+            },
+            {
+                id: 17,
+                title: "CBT Universitas Abdurrab",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/cbt.png",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/cbt.png"],
+                imageCaptions: ["Sistem Ujian Berbasis Komputer (CBT) Universitas Abdurrab"],
+                description: "Sistem Ujian Berbasis Komputer (Computer Based Test) Universitas Abdurrab yang andal, efisien, dan mendukung ribuan peserta ujian serentak.",
+                link: "https://cbt.univrab.ac.id/",
+                tech: ["PHP", "Laravel", "MySQL", "Bootstrap", "Web Security"],
+                status: "LIVE PRODUCTION",
+                isLocked: false
+            },
+            {
+                id: 8,
+                title: "Universitas Abdurrab Official Portal",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/univrabweb.png",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/univrabweb.png"],
+                imageCaptions: ["Website Resmi Portal Universitas Abdurrab"],
+                description: "Website resmi Universitas Abdurrab yang menyajikan informasi kampus komprehensif, profil fakultas, PMB, dan berita terbaru.",
+                link: "https://univrab.ac.id/",
+                tech: ["CMS / Laravel", "SEO Optimized", "High Traffic Ready", "Responsive"],
+                status: "LIVE PRODUCTION",
+                isLocked: false
+            },
+            {
+                id: 9,
+                title: "Teknik Informatika | Univrab",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/webti.jpeg",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/webti.jpeg"],
+                imageCaptions: ["Portal Prodi Teknik Informatika Univrab"],
+                description: "Website portal informasi program studi Teknik Informatika Universitas Abdurrab untuk kurikulum, dosen, dan riset mahasiswa.",
+                link: "https://teknik-informatika.univrab.ac.id/",
+                tech: ["Web Architecture", "PHP", "MySQL", "Modern CSS"],
+                status: "LIVE PRODUCTION",
+                isLocked: false
+            },
+            {
+                id: 10,
+                title: "Web CMS | Fakultas Teknik Univrab",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/Web_Fakul.png",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/Web_Fakul.png"],
+                imageCaptions: ["CMS Fakultas Teknik Universitas Abdurrab"],
+                description: "Web Content Management System (CMS) Fakultas Teknik Universitas Abdurrab untuk publikasi artikel dan kegiatan keinsinyuran.",
+                link: "https://fakultas-teknik.univrab.ac.id/",
+                tech: ["CMS Engine", "PHP", "MySQL", "Modern Layout"],
+                status: "LIVE PRODUCTION",
+                isLocked: false
+            },
+            {
+                id: 11,
+                title: "Univrab Mobile",
+                category: "Aplikasi Mobile",
+                rawCategory: "mobileApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/mobile.png",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/mobile.png"],
+                imageCaptions: ["Univrab Mobile App Attendance System"],
+                description: "Aplikasi presensi kehadiran dan layanan akademik berbasis mobile untuk mahasiswa dan staf Universitas Abdurrab.",
+                link: "https://github.com/saditya2610/univrabmobile",
+                tech: ["Flutter / React Native", "REST API", "GPS Geolocation", "Cross-Platform"],
+                status: "SOURCE CODE ON GITHUB",
+                isLocked: false
+            },
+            {
+                id: 12,
+                title: "Kalkulator Sederhana & Matrix Math",
+                category: "Aplikasi Web",
+                rawCategory: "webApp",
+                image: "https://my-portfoliosurya-new.vercel.app/assets/img/blog/kalkulator.png",
+                images: ["https://my-portfoliosurya-new.vercel.app/assets/img/blog/kalkulator.png"],
+                imageCaptions: ["Aplikasi Kalkulator JavaScript & Glassmorphism"],
+                description: "Aplikasi kalkulator interaktif menggunakan vanilla JavaScript dengan tampilan responsif dan operasi matematika lengkap.",
+                link: "https://saditya2610.github.io/kalkulator/",
+                tech: ["Vanilla JavaScript", "HTML5", "CSS3 Glassmorphism", "Math Algorithms"],
+                status: "LIVE DEMO",
+                isLocked: false
+            },
+        ];
+
+        // Categories definition
+        const categoriesList = [
+            { id: "All", name: "Semua" },
+            { id: "Servis & Hardware", name: "Servis & Hardware" },
+            { id: "Aplikasi Web", name: "Aplikasi Web" },
+            { id: "Aplikasi Mobile", name: "Aplikasi Mobile" },
+            { id: "Pengembangan Game", name: "Pengembangan Game" },
+            { id: "E-Commerce", name: "E-Commerce" },
+            { id: "CMS", name: "CMS" }
+        ];
+
+        let selectedCategory = "All";
+        let searchQuery = "";
+
+        // Render Filter Pills
+        function renderCategoryPills() {
+            const container = document.getElementById('category-pill-list');
+            container.innerHTML = '';
+
+            categoriesList.forEach(cat => {
+                const btn = document.createElement('button');
+                const isActive = (selectedCategory === cat.id);
+                btn.className = `filter-btn px-4 py-2 rounded-xl text-xs font-orbitron tracking-wider transition whitespace-nowrap ${isActive
+                    ? 'active'
+                    : 'glass-card text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50'
+                    }`;
+                btn.innerText = cat.name;
+                btn.onclick = () => {
+                    selectedCategory = cat.id;
+                    renderCategoryPills();
+                    renderProjects();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // Render Projects Grid
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            const emptyState = document.getElementById('empty-state-container');
+            const countDisplay = document.getElementById('projects-count-display');
+            const statTotal = document.getElementById('stat-total-projects');
+            if (statTotal) statTotal.innerText = projectsData.length;
+
+            const filtered = projectsData.filter(item => {
+                const matchCat = (selectedCategory === 'All') || (item.category === selectedCategory);
+                const query = searchQuery.toLowerCase().trim();
+                const matchSearch = !query ||
+                    item.title.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query) ||
+                    (item.tech && item.tech.some(t => t.toLowerCase().includes(query)));
+                return matchCat && matchSearch;
+            });
+
+            countDisplay.innerText = `Menampilkan ${filtered.length} dari ${projectsData.length} proyek`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = '';
+
+            filtered.forEach(project => {
+                const card = document.createElement('article');
+                card.className = "project-card glass-card rounded-2xl overflow-hidden border border-cyber-purple/30 flex flex-col justify-between group";
+
+                const isPrivate = project.isLocked || project.link === '#';
+                const hasMultipleImages = project.images && project.images.length > 1;
+
+                const techBadges = (project.tech || []).slice(0, 3).map(t =>
+                    `<span class="bg-cyber-bg/80 border border-cyber-cardBorder text-cyber-purpleLight px-2 py-0.5 rounded text-[10px] font-mono">${t}</span>`
+                ).join(' ');
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Thumbnail Image Wrapper -->
+                        <div class="project-img-wrapper relative h-48 sm:h-52 bg-[#0d071b] overflow-hidden border-b border-cyber-cardBorder/60 cursor-pointer"
+                            onclick="openProjectModal(${project.id})">
+                            <img src="${project.image}" alt="${project.title}" loading="lazy"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            
+                            <!-- Fallback UI if image link fails -->
+                            <div class="hidden w-full h-full bg-gradient-to-tr from-[#150a2e] to-[#0a0515] flex-col items-center justify-center text-center p-4">
+                                <i class="fa-solid fa-code text-3xl text-cyber-cyan mb-1"></i>
+                                <span class="font-orbitron text-[10px] text-cyber-purpleLight tracking-wider">${project.title}</span>
+                            </div>
+
+                            <!-- Category Badge Overlay -->
+                            <div class="absolute top-3 left-3 z-10">
+                                <span class="bg-black/85 backdrop-blur-md border border-cyber-cyan/60 px-3 py-1 rounded-full text-[10px] font-orbitron font-bold text-cyber-cyan uppercase tracking-wider shadow-lg">
+                                    ${project.category}
+                                </span>
+                            </div>
+
+                            <!-- Top Right Status & Multi-Photo Badges -->
+                            <div class="absolute top-3 right-3 z-10 flex items-center gap-1.5">
+                                ${hasMultipleImages ? `
+                                    <span class="bg-cyber-purple/90 backdrop-blur-md border border-cyber-pink/60 px-2 py-0.5 rounded text-[9px] font-orbitron text-white flex items-center gap-1 shadow-lg">
+                                        <i class="fa-solid fa-images text-cyber-pink"></i> ${project.images.length} FOTO
+                                    </span>
+                                ` : ''}
+                                <span class="bg-cyber-card/90 backdrop-blur-md border border-cyber-purple/50 px-2 py-0.5 rounded text-[9px] font-mono ${isPrivate ? 'text-pink-400' : 'text-emerald-400'} uppercase">
+                                    ${isPrivate ? 'Internal' : 'Active'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-orbitron font-bold text-base sm:text-lg text-white group-hover:text-cyber-cyan transition duration-200 line-clamp-1 cursor-pointer"
+                                onclick="openProjectModal(${project.id})">
+                                ${project.title}
+                            </h3>
+                            <p class="text-cyber-muted text-xs leading-relaxed line-clamp-2 font-sans">
+                                ${project.description}
+                            </p>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                                ${techBadges}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="p-5 pt-3 border-t border-cyber-cardBorder/50 flex items-center justify-between gap-3">
+                        <button onclick="openProjectModal(${project.id})"
+                            class="text-xs font-orbitron text-slate-400 hover:text-white transition flex items-center gap-1.5 py-1">
+                            <i class="fa-solid fa-circle-info text-cyber-purpleLight"></i> Detail ${hasMultipleImages ? `(${project.images.length} Foto)` : ''}
+                        </button>
+
+                        ${isPrivate ? `
+                            <span class="text-[11px] font-orbitron text-pink-400 font-bold flex items-center gap-1 bg-pink-500/10 px-3 py-1.5 rounded-lg border border-pink-500/20">
+                                <i class="fa-solid fa-lock text-[10px]"></i> Terkunci
+                            </span>
+                        ` : `
+                            <a href="${project.link}" target="_blank" rel="noopener noreferrer"
+                                class="cyber-btn px-4 py-1.5 rounded-lg font-orbitron text-xs font-bold text-white flex items-center gap-1.5 group/btn">
+                                <span>${project.category === 'Servis & Hardware' ? 'Konsultasi' : 'Lihat Proyek'}</span>
+                                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover/btn:translate-x-1 transition duration-200"></i>
+                            </a>
+                        `}
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Search Input Handler
+        const searchInput = document.getElementById('project-search-input');
+        const clearBtn = document.getElementById('clear-search-btn');
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderProjects();
+        });
+
+        function clearSearch() {
+            searchInput.value = '';
+            searchQuery = '';
+            clearBtn.classList.add('hidden');
+            renderProjects();
+        }
+
+        function resetFilters() {
+            selectedCategory = 'All';
+            clearSearch();
+            renderCategoryPills();
+            renderProjects();
+            showCyberNotification("Filter berhasil diatur ulang ke kondisi default.", "RESET FILTER", "success");
+        }
+
+        // ==========================================
+        // 4. SOCIAL MEDIA-STYLE MODAL IMAGE CAROUSEL
+        // ==========================================
+        let modalActiveImages = [];
+        let modalActiveCaptions = [];
+        let modalCurrentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function updateModalSlide(index) {
+            if (!modalActiveImages || modalActiveImages.length === 0) return;
+            modalCurrentSlide = (index + modalActiveImages.length) % modalActiveImages.length;
+
+            const modalImg = document.getElementById('modal-img');
+            const modalFallback = document.getElementById('modal-img-fallback');
+            const captionText = document.getElementById('slider-caption-text');
+            const indexBadge = document.getElementById('slider-index-badge');
+            const counterLabel = document.getElementById('slider-counter-label');
+            const prevBtn = document.getElementById('slider-prev-btn');
+            const nextBtn = document.getElementById('slider-next-btn');
+            const topCounter = document.getElementById('slider-top-counter');
+
+            modalImg.style.opacity = '0';
+            setTimeout(() => {
+                modalImg.src = modalActiveImages[modalCurrentSlide];
+                modalImg.style.opacity = '1';
+            }, 120);
+
+            modalImg.style.display = 'block';
+            modalFallback.classList.add('hidden');
+            modalImg.onerror = () => {
+                modalImg.style.display = 'none';
+                modalFallback.classList.remove('hidden');
+            };
+
+            const caption = modalActiveCaptions[modalCurrentSlide] || `Dokumentasi Foto ${modalCurrentSlide + 1}`;
+            captionText.innerText = caption;
+            indexBadge.innerText = `${modalCurrentSlide + 1} / ${modalActiveImages.length}`;
+            counterLabel.innerText = `Slide ${modalCurrentSlide + 1} dari ${modalActiveImages.length}`;
+
+            // Show/Hide slide controls if single image
+            if (modalActiveImages.length > 1) {
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+                topCounter.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                topCounter.classList.add('hidden');
+            }
+
+            // Update Thumbnails Active Highlight
+            const thumbs = document.querySelectorAll('.modal-thumb-btn');
+            thumbs.forEach((thumb, idx) => {
+                if (idx === modalCurrentSlide) {
+                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 border-cyber-cyan shadow-[0_0_12px_rgba(6,182,212,0.6)] scale-105 transition-all duration-200 shrink-0 bg-black/60";
+                } else {
+                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 opacity-50 hover:opacity-100 hover:border-cyber-purpleLight transition-all duration-200 shrink-0 bg-black/60 cursor-pointer";
+                }
+            });
+        }
+
+        function slideModalPrev(e) {
+            if (e) e.stopPropagation();
+            if (modalActiveImages.length > 1) {
+                updateModalSlide(modalCurrentSlide - 1);
+            }
+        }
+
+        function slideModalNext(e) {
+            if (e) e.stopPropagation();
+            if (modalActiveImages.length > 1) {
+                updateModalSlide(modalCurrentSlide + 1);
+            }
+        }
+
+        function renderModalThumbnails() {
+            const strip = document.getElementById('modal-thumbnail-strip');
+            strip.innerHTML = '';
+
+            if (modalActiveImages.length <= 1) {
+                strip.classList.add('hidden');
+                return;
+            }
+
+            strip.classList.remove('hidden');
+            modalActiveImages.forEach((imgUrl, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 shrink-0 transition-all duration-200";
+                btn.onclick = () => updateModalSlide(idx);
+                btn.innerHTML = `<img src="${imgUrl}" alt="Thumb ${idx + 1}" class="w-full h-full object-cover">`;
+                strip.appendChild(btn);
+            });
+        }
+
+        function openProjectModal(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            const modal = document.getElementById('project-modal');
+            const card = document.getElementById('project-modal-card');
+
+            document.getElementById('modal-title').innerText = project.title;
+            document.getElementById('modal-category-badge').innerText = project.category;
+            document.getElementById('modal-status-badge').innerText = project.status;
+            document.getElementById('modal-desc').innerText = project.description;
+
+            // Load Carousel Images & Captions
+            modalActiveImages = (project.images && project.images.length > 0) ? project.images : [project.image];
+            modalActiveCaptions = (project.imageCaptions && project.imageCaptions.length > 0) ? project.imageCaptions : [project.title];
+            modalCurrentSlide = 0;
+
+            renderModalThumbnails();
+            updateModalSlide(0);
+
+            // Render Tech Tags
+            const tagContainer = document.getElementById('modal-tech-tags');
+            tagContainer.innerHTML = (project.tech || []).map(t =>
+                `<span class="bg-cyber-purple/30 border border-cyber-purple/60 text-cyber-cyan px-2.5 py-1 rounded-md text-xs font-mono">${t}</span>`
+            ).join(' ');
+
+            // Live Button
+            const liveBtn = document.getElementById('modal-live-btn');
+            if (project.isLocked || project.link === '#') {
+                liveBtn.href = "#";
+                liveBtn.classList.add('opacity-50', 'pointer-events-none');
+                liveBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Proyek Internal (Terkunci)`;
+            } else if (project.category === 'Servis & Hardware') {
+                liveBtn.href = project.link;
+                liveBtn.classList.remove('opacity-50', 'pointer-events-none');
+                liveBtn.innerHTML = `<i class="fa-brands fa-whatsapp text-emerald-400"></i> Konsultasi Servis via WhatsApp`;
+            } else {
+                liveBtn.href = project.link;
+                liveBtn.classList.remove('opacity-50', 'pointer-events-none');
+                liveBtn.innerHTML = `<i class="fa-solid fa-arrow-up-right-from-square text-cyber-cyan"></i> Buka Website / Repo`;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            const card = document.getElementById('project-modal-card');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+
+        // Close on clicking outside modal content
+        document.getElementById('project-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'project-modal') closeProjectModal();
+        });
+
+        // Keyboard Navigation (ESC to close, ArrowLeft/ArrowRight to slide)
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('project-modal');
+            const isOpen = !modal.classList.contains('opacity-0');
+            if (!isOpen) return;
+
+            if (e.key === 'Escape') {
+                closeProjectModal();
+            } else if (e.key === 'ArrowLeft') {
+                slideModalPrev();
+            } else if (e.key === 'ArrowRight') {
+                slideModalNext();
+            }
+        });
+
+        // Touch Swipe Gestures for Mobile (Social Media Style Swipe)
+        const sliderContainer = document.getElementById('modal-image-container');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            sliderContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, { passive: true });
+        }
+
+        function handleSwipeGesture() {
+            const swipeThreshold = 40;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe Left -> Next
+                slideModalNext();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe Right -> Prev
+                slideModalPrev();
+            }
+        }
+
+        // ==========================================
+        // 5. PEMUTAR MUSIK POP INDONESIA
+        // ==========================================
+        const playlist = [
+            {
+                title: "Hindia - Everything You Are",
+                artist: "Hindia",
+                album: "Pop Indie Chillout",
+                url: "./hindia-everything.mp3"
+            },
+            {
+                title: "ST12 - Putri Iklan (Acoustic Cover)",
+                artist: "Aura Band x Putri Risma",
+                album: "Acoustic Pop Session",
+                url: "./st12-putri-iklan.mp3"
+            },
+            {
+                title: "Backstreet Boys - Shape of My Heart",
+                artist: "Backstreet Boys",
+                album: "Black & Blue",
+                url: "./backstreetboys-shapeofmyheart.mp3"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let audioPlayer = new Audio(playlist[0].url);
+        let visualizerInterval = null;
+        audioPlayer.volume = 0.7;
+
+        audioPlayer.addEventListener('ended', nextTrack);
+
+        document.getElementById('volume-slider').addEventListener('input', (e) => {
+            audioPlayer.volume = parseFloat(e.target.value);
+        });
+
+        function togglePlayMusic() {
+            isPlaying = !isPlaying;
+            const playIcon = document.getElementById('play-icon');
+            const statusBadge = document.getElementById('player-status-badge');
+
+            if (isPlaying) {
+                playIcon.className = "fa-solid fa-pause text-sm";
+                statusBadge.innerText = "PLAYING";
+                statusBadge.className = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
+
+                audioPlayer.play().then(() => {
+                    startVisualizerAnimation();
+                    showCyberNotification("Memutar: " + playlist[currentTrackIndex].title, "PEMUTAR MUSIK", "success");
+                }).catch(err => {
+                    console.error(err);
+                    isPlaying = false;
+                    playIcon.className = "fa-solid fa-play text-sm ml-0.5";
+                    statusBadge.innerText = "ERROR";
+                    statusBadge.className = "bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-[10px] font-mono";
+                    showCyberNotification("Gagal memutar audio otomatis. Anda dapat memuat file MP3 sendiri.", "PUTAR GAGAL", "warning");
+                });
+            } else {
+                playIcon.className = "fa-solid fa-play text-sm ml-0.5";
+                statusBadge.innerText = "PAUSED";
+                statusBadge.className = "bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 px-2 py-0.5 rounded text-[10px] font-mono";
+                audioPlayer.pause();
+                stopVisualizerAnimation();
+            }
+        }
+
+        function selectTrack(index) {
+            currentTrackIndex = index;
+            const track = playlist[index];
+
+            document.getElementById('track-title').innerText = track.title;
+            document.getElementById('track-artist').innerText = track.artist;
+            document.getElementById('track-album').innerText = "Album: " + track.album;
+
+            const items = document.querySelectorAll('.playlist-item');
+            items.forEach((item, idx) => {
+                if (idx === index) {
+                    item.className = "playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between";
+                    item.querySelector('i').className = "fa-solid fa-wave-square text-cyber-pink text-xs";
+                } else {
+                    item.className = "playlist-item p-2 rounded-lg cursor-pointer hover:bg-cyber-purple/20 text-slate-300 flex items-center justify-between";
+                    item.querySelector('i').className = "fa-solid fa-music text-xs opacity-40";
+                }
+            });
+
+            audioPlayer.src = track.url;
+            audioPlayer.load();
+
+            if (isPlaying) {
+                audioPlayer.play().then(() => {
+                    startVisualizerAnimation();
+                }).catch(() => { });
+            }
+        }
+
+        function nextTrack() {
+            let nextIndex = (currentTrackIndex + 1) % playlist.length;
+            selectTrack(nextIndex);
+            if (!isPlaying) togglePlayMusic();
+        }
+
+        function prevTrack() {
+            let prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            selectTrack(prevIndex);
+            if (!isPlaying) togglePlayMusic();
+        }
+
+        function handleLocalAudioUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const objectUrl = URL.createObjectURL(file);
+                const customTrack = {
+                    title: file.name.replace(/\.[^/.]+$/, ""),
+                    artist: "Local Audio File",
+                    album: "Custom MP3 Upload",
+                    url: objectUrl
+                };
+
+                playlist.unshift(customTrack);
+
+                const container = document.getElementById('playlist-container');
+                const newElem = document.createElement('div');
+                newElem.onclick = () => selectTrack(0);
+                newElem.className = "playlist-item active-track p-2 rounded-lg cursor-pointer bg-cyber-purple/30 border border-cyber-purple/50 text-white flex items-center justify-between";
+                newElem.innerHTML = `<span class="truncate">★ ${customTrack.title}</span><i class="fa-solid fa-wave-square text-cyber-pink text-xs"></i>`;
+
+                container.insertBefore(newElem, container.children[1]);
+                selectTrack(0);
+                if (!isPlaying) togglePlayMusic();
+                showCyberNotification(`File "${customTrack.title}" siap diputar!`, "BERHASIL DIUNGGAH", "success");
+            }
+        }
+
+        function startVisualizerAnimation() {
+            const bars = document.querySelectorAll('#visualizer-bars div');
+            clearInterval(visualizerInterval);
+            visualizerInterval = setInterval(() => {
+                bars.forEach(bar => {
+                    const randomHeight = Math.floor(Math.random() * 20) + 4;
+                    bar.style.height = `${randomHeight}px`;
+                });
+            }, 120);
+        }
+
+        function stopVisualizerAnimation() {
+            clearInterval(visualizerInterval);
+            const bars = document.querySelectorAll('#visualizer-bars div');
+            bars.forEach(bar => {
+                bar.style.height = `6px`;
+            });
+        }
+
+        document.getElementById('toggle-music-widget').addEventListener('click', () => {
+            document.getElementById('music-player-container').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // ==========================================
+        // 6. CYBER TOAST NOTIFICATION
+        // ==========================================
+        function showCyberNotification(message, title = "SISTEM NOTIFIKASI", type = "success") {
+            const toast = document.getElementById('cyber-toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastTitle = document.getElementById('toast-title');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastTitle.innerText = title;
+            toastMsg.innerText = message;
+
+            if (type === 'error') {
+                toastIcon.className = "fa-solid fa-circle-xmark text-red-400 text-lg";
+            } else if (type === 'warning') {
+                toastIcon.className = "fa-solid fa-triangle-exclamation text-cyber-pink text-lg";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+
+        // ==========================================
+        // 7. MOBILE MENU TOGGLE
+        // ==========================================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+        document.getElementById('mobile-music-btn').addEventListener('click', () => {
+            document.getElementById('music-player-container').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Initial setup
+        renderCategoryPills();
+        renderProjects();
+    </script>
+</body>
+
+</html>
