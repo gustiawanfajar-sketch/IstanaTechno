@@ -649,11 +649,13 @@
             <div class="relative rounded-2xl overflow-hidden border border-cyber-purple/50 bg-[#06030e] select-none shadow-2xl group/slider"
                 id="modal-slider-wrapper">
 
-                <!-- Main Image Stage (Full Display Aspect Fit) -->
+                <!-- Main Image / Video Stage (Full Display Aspect Fit) -->
                 <div class="w-full h-72 sm:h-96 md:h-[430px] flex items-center justify-center relative p-1 bg-black/40 overflow-hidden"
                     id="modal-image-container">
                     <img id="modal-img" src="" alt="Preview"
                         class="w-full h-full object-contain transition-all duration-300">
+                    <video id="modal-video" controls playsinline preload="metadata"
+                        class="w-full h-full object-contain hidden transition-all duration-300 rounded-xl bg-black"></video>
 
                     <!-- Fallback UI -->
                     <div id="modal-img-fallback"
@@ -910,6 +912,27 @@
         // ==========================================
         const projectsData = [
             {
+                id: 21,
+                title: "Perbaikan & Pergantian Keyboard Laptop Acer Aspire E1-471",
+                category: "Servis & Hardware",
+                rawCategory: "servisHardware",
+                hasVideo: true,
+                image: "./acer-aspire-keyboard-repair.jpg",
+                images: [
+                    "./proyek/acerkeyboardvideo.mp4",
+                    "./acer-aspire-keyboard-repair.jpg"
+                ],
+                imageCaptions: [
+                    "Video Dokumentasi Pengerjaan: Proses Servis, Pergantian & Uji Respon Keyboard Baru Acer Aspire E1-471",
+                    "Dokumentasi Hasil Servis: Keyboard Original Baru Acer Aspire E1-471 Terpasang Rapi, Bersih & Presisi"
+                ],
+                description: "Pengerjaan servis komprehensif dan pergantian modul keyboard laptop Acer Aspire E1-471. Solusi tuntas untuk kendala tombol macet, tuts tidak merespons (ghost key/not working), dan kerusakan jalur flexboard keyboard lama. Dilakukan penggantian dengan unit keyboard baru original, pembersihan menyeluruh sela palmrest & chassis dari debu/kotoran, serta pengujian responsivitas seluruh tombol (all-key test utility) bergaransi resmi Istana Techno.",
+                link: "https://wa.me/6282297288018?text=Halo%20Istana%20Techno%2C%20saya%20mau%20konsultasi%20perbaikan%20dan%20pergantian%20keyboard%20laptop%20Acer%20Aspire%20E1-471",
+                tech: ["Acer Aspire E1-471", "Video Pengerjaan HD", "Ganti Keyboard Original", "Keyboard Test Utility", "Chassis Deep Clean", "Hardware Repair", "Garansi Servis"],
+                status: "SELESAI & TESTED 100%",
+                isLocked: false
+            },
+            {
                 id: 19,
                 title: "Optimalisasi OS Windows & Pergantian Speaker Laptop Lenovo IdeaPad Slim 3",
                 category: "Servis & Hardware",
@@ -1124,7 +1147,9 @@
                 card.className = "project-card glass-card rounded-2xl overflow-hidden border border-cyber-purple/30 flex flex-col justify-between group";
 
                 const isPrivate = project.isLocked || project.link === '#';
-                const hasMultipleImages = project.images && project.images.length > 1;
+                const hasVideo = project.hasVideo || (project.images && project.images.some(u => u.endsWith('.mp4') || u.endsWith('.webm')));
+                const mediaCount = (project.images && project.images.length) || 1;
+                const hasMultipleImages = mediaCount > 1;
 
                 const techBadges = (project.tech || []).slice(0, 3).map(t =>
                     `<span class="bg-cyber-bg/80 border border-cyber-cardBorder text-cyber-purpleLight px-2 py-0.5 rounded text-[10px] font-mono">${t}</span>`
@@ -1145,6 +1170,15 @@
                                 <span class="font-orbitron text-[10px] text-cyber-purpleLight tracking-wider">${project.title}</span>
                             </div>
 
+                            ${hasVideo ? `
+                                <!-- Play Icon Overlay for Videos -->
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 transition-transform duration-300 group-hover:scale-110">
+                                    <div class="w-12 h-12 rounded-full bg-cyber-pink/80 backdrop-blur-sm border border-white/40 text-white flex items-center justify-center text-base shadow-[0_0_20px_rgba(236,72,153,0.8)] group-hover:bg-cyber-pink">
+                                        <i class="fa-solid fa-play ml-1"></i>
+                                    </div>
+                                </div>
+                            ` : ''}
+
                             <!-- Category Badge Overlay -->
                             <div class="absolute top-3 left-3 z-10">
                                 <span class="bg-black/85 backdrop-blur-md border border-cyber-cyan/60 px-3 py-1 rounded-full text-[10px] font-orbitron font-bold text-cyber-cyan uppercase tracking-wider shadow-lg">
@@ -1152,9 +1186,14 @@
                                 </span>
                             </div>
 
-                            <!-- Top Right Status & Multi-Photo Badges -->
+                            <!-- Top Right Status & Multi-Photo/Video Badges -->
                             <div class="absolute top-3 right-3 z-10 flex items-center gap-1.5">
-                                ${hasMultipleImages ? `
+                                ${hasVideo ? `
+                                    <span class="bg-gradient-to-r from-red-600/90 to-pink-600/90 backdrop-blur-md border border-pink-400/60 px-2.5 py-0.5 rounded text-[9px] font-orbitron font-bold text-white flex items-center gap-1 shadow-lg animate-pulse">
+                                        <i class="fa-solid fa-circle-play"></i> VIDEO HD
+                                    </span>
+                                ` : ''}
+                                ${(!hasVideo && hasMultipleImages) ? `
                                     <span class="bg-cyber-purple/90 backdrop-blur-md border border-cyber-pink/60 px-2 py-0.5 rounded text-[9px] font-orbitron text-white flex items-center gap-1 shadow-lg">
                                         <i class="fa-solid fa-images text-cyber-pink"></i> ${project.images.length} FOTO
                                     </span>
@@ -1186,7 +1225,7 @@
                     <div class="p-5 pt-3 border-t border-cyber-cardBorder/50 flex items-center justify-between gap-3">
                         <button onclick="openProjectModal(${project.id})"
                             class="text-xs font-orbitron text-slate-400 hover:text-white transition flex items-center gap-1.5 py-1">
-                            <i class="fa-solid fa-circle-info text-cyber-purpleLight"></i> Detail ${hasMultipleImages ? `(${project.images.length} Foto)` : ''}
+                            <i class="${hasVideo ? 'fa-solid fa-circle-play text-cyber-pink' : 'fa-solid fa-circle-info text-cyber-purpleLight'}"></i> ${hasVideo ? 'Tonton Video & Detail' : `Detail ${hasMultipleImages ? `(${project.images.length} Foto)` : ''}`}
                         </button>
 
                         ${isPrivate ? `
@@ -1237,8 +1276,9 @@
         }
 
         // ==========================================
-        // 4. SOCIAL MEDIA-STYLE MODAL IMAGE CAROUSEL
+        // 4. SOCIAL MEDIA-STYLE MODAL MEDIA CAROUSEL (IMAGES & VIDEOS)
         // ==========================================
+        let currentOpenProject = null;
         let modalActiveImages = [];
         let modalActiveCaptions = [];
         let modalCurrentSlide = 0;
@@ -1249,7 +1289,10 @@
             if (!modalActiveImages || modalActiveImages.length === 0) return;
             modalCurrentSlide = (index + modalActiveImages.length) % modalActiveImages.length;
 
+            const currentMedia = modalActiveImages[modalCurrentSlide];
+            const isVideo = currentMedia && (currentMedia.endsWith('.mp4') || currentMedia.endsWith('.webm') || currentMedia.includes('.mp4'));
             const modalImg = document.getElementById('modal-img');
+            const modalVideo = document.getElementById('modal-video');
             const modalFallback = document.getElementById('modal-img-fallback');
             const captionText = document.getElementById('slider-caption-text');
             const indexBadge = document.getElementById('slider-index-badge');
@@ -1258,42 +1301,67 @@
             const nextBtn = document.getElementById('slider-next-btn');
             const topCounter = document.getElementById('slider-top-counter');
 
-            modalImg.style.opacity = '0';
-            setTimeout(() => {
-                modalImg.src = modalActiveImages[modalCurrentSlide];
-                modalImg.style.opacity = '1';
-            }, 120);
-
-            modalImg.style.display = 'block';
-            modalFallback.classList.add('hidden');
-            modalImg.onerror = () => {
+            if (isVideo) {
                 modalImg.style.display = 'none';
-                modalFallback.classList.remove('hidden');
-            };
-
-            const caption = modalActiveCaptions[modalCurrentSlide] || `Dokumentasi Foto ${modalCurrentSlide + 1}`;
-            captionText.innerText = caption;
-            indexBadge.innerText = `${modalCurrentSlide + 1} / ${modalActiveImages.length}`;
-            counterLabel.innerText = `Slide ${modalCurrentSlide + 1} dari ${modalActiveImages.length}`;
-
-            // Show/Hide slide controls if single image
-            if (modalActiveImages.length > 1) {
-                prevBtn.classList.remove('hidden');
-                nextBtn.classList.remove('hidden');
-                topCounter.classList.remove('hidden');
+                modalFallback.classList.add('hidden');
+                if (modalVideo) {
+                    modalVideo.classList.remove('hidden');
+                    modalVideo.style.display = 'block';
+                    if (!modalVideo.src.includes(currentMedia.replace(/^\.\//, ''))) {
+                        modalVideo.src = currentMedia;
+                        if (currentOpenProject && currentOpenProject.image) {
+                            modalVideo.poster = currentOpenProject.image;
+                        }
+                    }
+                }
+                if (topCounter) {
+                    topCounter.innerHTML = `<i class="fa-solid fa-circle-play text-pink-400 animate-pulse"></i> <span id="slider-counter-label">Video Dokumentasi (${modalCurrentSlide + 1}/${modalActiveImages.length})</span>`;
+                }
             } else {
-                prevBtn.classList.add('hidden');
-                nextBtn.classList.add('hidden');
-                topCounter.classList.add('hidden');
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.style.display = 'none';
+                    modalVideo.classList.add('hidden');
+                }
+                modalImg.style.opacity = '0';
+                modalImg.style.display = 'block';
+                setTimeout(() => {
+                    modalImg.src = currentMedia;
+                    modalImg.style.opacity = '1';
+                }, 120);
+
+                modalFallback.classList.add('hidden');
+                modalImg.onerror = () => {
+                    modalImg.style.display = 'none';
+                    modalFallback.classList.remove('hidden');
+                };
+                if (topCounter) {
+                    topCounter.innerHTML = `<i class="fa-solid fa-images text-cyber-pink"></i> <span id="slider-counter-label">Slide ${modalCurrentSlide + 1} dari ${modalActiveImages.length}</span>`;
+                }
+            }
+
+            const caption = modalActiveCaptions[modalCurrentSlide] || `Dokumentasi ${isVideo ? 'Video' : 'Foto'} ${modalCurrentSlide + 1}`;
+            if (captionText) captionText.innerText = caption;
+            if (indexBadge) indexBadge.innerText = `${modalCurrentSlide + 1} / ${modalActiveImages.length}`;
+
+            // Show/Hide slide controls if single image/video
+            if (modalActiveImages.length > 1) {
+                if (prevBtn) prevBtn.classList.remove('hidden');
+                if (nextBtn) nextBtn.classList.remove('hidden');
+                if (topCounter) topCounter.classList.remove('hidden');
+            } else {
+                if (prevBtn) prevBtn.classList.add('hidden');
+                if (nextBtn) nextBtn.classList.add('hidden');
+                if (topCounter) topCounter.classList.add('hidden');
             }
 
             // Update Thumbnails Active Highlight
             const thumbs = document.querySelectorAll('.modal-thumb-btn');
             thumbs.forEach((thumb, idx) => {
                 if (idx === modalCurrentSlide) {
-                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 border-cyber-cyan shadow-[0_0_12px_rgba(6,182,212,0.6)] scale-105 transition-all duration-200 shrink-0 bg-black/60";
+                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 border-cyber-cyan shadow-[0_0_12px_rgba(6,182,212,0.6)] scale-105 transition-all duration-200 shrink-0 bg-black/60 relative";
                 } else {
-                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 opacity-50 hover:opacity-100 hover:border-cyber-purpleLight transition-all duration-200 shrink-0 bg-black/60 cursor-pointer";
+                    thumb.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 opacity-50 hover:opacity-100 hover:border-cyber-purpleLight transition-all duration-200 shrink-0 bg-black/60 cursor-pointer relative";
                 }
             });
         }
@@ -1322,12 +1390,26 @@
             }
 
             strip.classList.remove('hidden');
-            modalActiveImages.forEach((imgUrl, idx) => {
+            modalActiveImages.forEach((mediaUrl, idx) => {
+                const isVideo = mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.webm') || mediaUrl.includes('.mp4');
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 shrink-0 transition-all duration-200";
+                btn.className = "modal-thumb-btn w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-cyber-purple/40 shrink-0 transition-all duration-200 relative";
                 btn.onclick = () => updateModalSlide(idx);
-                btn.innerHTML = `<img src="${imgUrl}" alt="Thumb ${idx + 1}" class="w-full h-full object-cover">`;
+                if (isVideo) {
+                    const posterImg = (currentOpenProject && currentOpenProject.image) ? currentOpenProject.image : './acer-aspire-keyboard-repair.jpg';
+                    btn.innerHTML = `
+                        <img src="${posterImg}" alt="Thumb Video" class="w-full h-full object-cover brightness-75">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <span class="w-5 h-5 rounded-full bg-cyber-pink text-white flex items-center justify-center text-[8px] shadow-lg">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </span>
+                        </div>
+                        <span class="absolute bottom-0 inset-x-0 bg-black/80 text-[7px] font-orbitron text-cyber-cyan text-center py-0.5 font-bold">VIDEO</span>
+                    `;
+                } else {
+                    btn.innerHTML = `<img src="${mediaUrl}" alt="Thumb ${idx + 1}" class="w-full h-full object-cover">`;
+                }
                 strip.appendChild(btn);
             });
         }
@@ -1335,6 +1417,7 @@
         function openProjectModal(projectId) {
             const project = projectsData.find(p => p.id === projectId);
             if (!project) return;
+            currentOpenProject = project;
 
             const modal = document.getElementById('project-modal');
             const card = document.getElementById('project-modal-card');
@@ -1383,6 +1466,11 @@
         function closeProjectModal() {
             const modal = document.getElementById('project-modal');
             const card = document.getElementById('project-modal-card');
+            const modalVideo = document.getElementById('modal-video');
+            if (modalVideo) {
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+            }
             modal.classList.add('opacity-0', 'pointer-events-none');
             card.classList.remove('scale-100');
             card.classList.add('scale-95');
