@@ -172,6 +172,31 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* AI Diagnostics Custom Animations */
+        @keyframes aiGlowBorder {
+            0%, 100% { border-color: rgba(124, 58, 237, 0.4); box-shadow: 0 0 25px rgba(124, 58, 237, 0.25); }
+            50% { border-color: rgba(6, 182, 212, 0.7); box-shadow: 0 0 35px rgba(6, 182, 212, 0.4); }
+        }
+
+        .ai-active-glow {
+            animation: aiGlowBorder 4s infinite ease-in-out;
+        }
+
+        .ai-msg-enter {
+            animation: aiMsgIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes aiMsgIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -258,11 +283,11 @@
                         </div>
                     </div>
 
-                    <!-- Catalog Parts Dropdown -->
+                    <!-- Processor Dropdown -->
                     <div class="relative group px-2 py-2">
                         <button
                             class="text-cyber-text hover:text-cyber-cyan transition flex items-center gap-1 font-orbitron text-xs tracking-wider">
-                            CATALOG PARTS <i
+                            PROCESSOR <i
                                 class="fa-solid fa-chevron-down text-[10px] group-hover:rotate-180 transition duration-300"></i>
                         </button>
                         <div
@@ -431,77 +456,111 @@
                     </div>
                 </div>
 
-                <!-- Hero Right Column: Cyber HUD Mockup -->
+                <!-- Hero Right Column: AI Cyber Diagnostics Terminal -->
                 <div class="lg:col-span-5 relative">
-                    <div
-                        class="glass-card rounded-2xl p-5 border border-cyber-purple/50 relative overflow-hidden shadow-[0_0_50px_rgba(124,58,237,0.25)]">
+                    <div id="cyber-ai-card"
+                        class="glass-card rounded-2xl p-4 sm:p-5 border border-cyber-purple/50 relative overflow-hidden shadow-[0_0_50px_rgba(124,58,237,0.25)] ai-active-glow flex flex-col justify-between">
 
                         <!-- Top HUD Bar -->
                         <div
-                            class="flex justify-between items-center pb-4 mb-4 border-b border-cyber-cardBorder text-xs font-orbitron">
+                            class="flex justify-between items-center pb-3 mb-3 border-b border-cyber-cardBorder text-xs font-orbitron">
                             <div class="flex items-center space-x-2">
-                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                                <span class="text-cyber-muted ml-2">CYBER_DIAGNOSTICS.v2</span>
-                            </div>
-                            <span class="text-cyber-cyan font-mono"><i class="fa-solid fa-wifi text-[10px]"></i>
-                                ONLINE</span>
-                        </div>
-
-                        <!-- Live Cyber Chat Simulation -->
-                        <div class="space-y-4 font-sans text-xs sm:text-sm">
-                            <div class="flex items-start gap-3 justify-end">
-                                <div
-                                    class="bg-cyber-purple/30 border border-cyber-purple/50 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%]">
-                                    <p class="font-medium">"Laptop saya cepat panas & mendadak mati sendiri saat dipake
-                                        kerja, kenapa ya min?"</p>
-                                </div>
-                                <div
-                                    class="w-8 h-8 rounded-full bg-cyber-purple flex items-center justify-center text-white text-xs font-bold shrink-0">
-                                    USER
-                                </div>
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block shadow-[0_0_8px_rgba(234,179,8,0.6)]"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+                                <span class="text-white font-bold ml-1.5 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-microchip text-cyber-cyan animate-pulse"></i> CYBER_DIAGNOSTICS<span class="text-cyber-pink">.v2</span>
+                                </span>
                             </div>
 
-                            <div class="flex items-start gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan flex items-center justify-center text-xs font-bold shrink-0">
-                                    IT
-                                </div>
-                                <div
-                                    class="bg-cyber-card border border-cyber-cyan/30 text-slate-200 p-3.5 rounded-2xl rounded-tl-none max-w-[90%] space-y-2">
-                                    <div
-                                        class="flex items-center justify-between text-[11px] text-cyber-cyan font-orbitron">
-                                        <span><i class="fa-solid fa-microchip"></i> HASIL DIAGNOSIS OTOMATIS</span>
-                                        <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Akurasi
-                                            98%</span>
-                                    </div>
-                                    <p class="leading-relaxed">
-                                        Gejala tersebut menandakan <span
-                                            class="text-cyber-cyan font-semibold">Overheating CPU/GPU</span> akibat
-                                        Thermal Paste mengering atau ventilasi kipas tersumbat debu tebal.
-                                    </p>
-                                    <div
-                                        class="bg-cyber-bg/80 p-2.5 rounded-lg border border-cyber-purple/30 text-xs space-y-1">
-                                        <div class="text-cyber-purpleLight font-semibold">Solusi Rekomendasi Istana
-                                            Techno:</div>
-                                        <div class="text-slate-300">• Deep Cleaning Fan & Replacement Thermal Paste High
-                                            Performance</div>
-                                        <div class="text-emerald-400 font-mono text-[11px] pt-1">Estimasi Pengerjaan:
-                                            ~45 - 60 Menit (Bisa Ditunggu)</div>
-                                    </div>
-                                </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px] font-mono flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> AI ACTIVE
+                                </span>
+                                <button onclick="toggleAIVoice()" id="ai-voice-toggle-btn"
+                                    class="p-1 rounded text-slate-400 hover:text-cyber-cyan transition text-xs"
+                                    title="Aktifkan/Nonaktifkan Suara AI">
+                                    <i class="fa-solid fa-volume-high" id="ai-voice-icon"></i>
+                                </button>
+                                <button onclick="resetAIChat()"
+                                    class="p-1 rounded text-slate-400 hover:text-cyber-pink transition text-xs"
+                                    title="Reset Percakapan AI">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Quick Interactive Diagnostic Input Bar -->
-                        <div class="mt-5 pt-3 border-t border-cyber-cardBorder flex items-center gap-2">
-                            <input type="text" id="hero-quick-input" placeholder="Ketik keluhan laptop/PC Anda..."
-                                class="bg-cyber-bg border border-cyber-cardBorder rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-cyber-cyan w-full">
-                            <button onclick="handleHeroDiagnose()"
-                                class="bg-cyber-cyan text-cyber-bg hover:bg-white font-bold font-orbitron px-4 py-2 rounded-xl text-xs transition shrink-0">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
+                        <!-- Quick Topics / Prompt Pills Strip -->
+                        <div class="mb-3">
+                            <div class="text-[10px] font-orbitron text-cyber-muted uppercase mb-1.5 flex items-center justify-between">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-bolt text-cyber-cyan"></i> Pilihan Topik Cepat:</span>
+                                <span class="text-[9px] text-cyber-purpleLight font-mono">KLIK UNTUK ANALISIS</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px] font-sans">
+                                <button onclick="askAIPrompt('Laptop saya panas dan sering mati sendiri saat main game / kerja')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    🔥 Overheat & Mati
+                                </button>
+                                <button onclick="askAIPrompt('Laptop nyala tapi layar gelap / blank hitam no display')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    🖥️ Layar Blank
+                                </button>
+                                <button onclick="askAIPrompt('Komputer sering Blue Screen (BSOD) kode Memory Management / Critical Process')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    ⚡ Blue Screen (BSOD)
+                                </button>
+                                <button onclick="askAIPrompt('Tombol keyboard laptop ada yang macet dan ngetik sendiri (ghost key)')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    ⌨️ Ganti Keyboard
+                                </button>
+                                <button onclick="askAIPrompt('Laptop sangat lemot disk 100%, rekomendasi upgrade SSD dan tambah RAM')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    🚀 Upgrade SSD & RAM
+                                </button>
+                                <button onclick="askAIPrompt('Rekomendasi spesifikasi rakit PC gaming dan rendering budget 7-10 juta')"
+                                    class="glass-card hover:bg-cyber-purple/30 hover:border-cyber-cyan/50 text-slate-300 hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition flex items-center gap-1 border border-cyber-purple/30">
+                                    🛠️ Rakit PC 2026
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Live Interactive AI Message Stream Box -->
+                        <div id="ai-chat-messages"
+                            class="space-y-3 font-sans text-xs sm:text-sm max-h-[290px] sm:max-h-[320px] overflow-y-auto pr-1">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+
+                        <!-- Thinking / Processing Indicator -->
+                        <div id="ai-thinking-indicator"
+                            class="hidden my-2 p-2.5 rounded-xl bg-cyber-bg/80 border border-cyber-cyan/40 text-cyber-cyan text-xs font-mono flex items-center gap-2">
+                            <i class="fa-solid fa-circle-notch fa-spin text-cyber-pink"></i>
+                            <span class="animate-pulse">Neural AI Core menganalisis hardware & sistem database...</span>
+                        </div>
+
+                        <!-- Interactive Diagnostic Input Bar -->
+                        <div class="mt-3 pt-3 border-t border-cyber-cardBorder/70">
+                            <form onsubmit="handleAIChatSubmit(event)" class="relative flex items-center gap-2">
+                                <div class="relative w-full">
+                                    <input type="text" id="hero-quick-input"
+                                        placeholder="Ketik keluhan komputer/laptop atau tanya spek & harga..."
+                                        autocomplete="off"
+                                        class="bg-[#0a0618] border border-cyber-cardBorder hover:border-cyber-purpleLight focus:border-cyber-cyan text-white pl-3.5 pr-9 py-2.5 rounded-xl font-sans text-xs outline-none transition-all duration-300 shadow-inner w-full focus:shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                                    <button type="button" onclick="startVoiceInput()" id="ai-mic-btn"
+                                        class="absolute right-2.5 top-1/2 -translate-y-1/2 text-cyber-muted hover:text-cyber-cyan transition p-1"
+                                        title="Bicara (Voice Input)">
+                                        <i class="fa-solid fa-microphone text-xs"></i>
+                                    </button>
+                                </div>
+                                <button type="submit" id="ai-send-btn"
+                                    class="cyber-btn bg-gradient-to-r from-cyber-purple to-cyber-cyan text-white font-bold font-orbitron px-4 py-2.5 rounded-xl text-xs transition shrink-0 flex items-center gap-1.5 shadow-[0_0_15px_rgba(124,58,237,0.5)] hover:scale-105">
+                                    <span>ANALISIS</span>
+                                    <i class="fa-solid fa-bolt text-[11px] text-cyber-cyan"></i>
+                                </button>
+                            </form>
+                            <div class="flex items-center justify-between text-[10px] text-cyber-muted font-mono mt-1.5 px-1">
+                                <span><i class="fa-solid fa-shield-check text-emerald-400 mr-1"></i> Terhubung Lab Servis Istana Techno</span>
+                                <span class="hidden sm:inline">Tekan Enter ↵</span>
+                            </div>
                         </div>
 
                     </div>
@@ -1630,15 +1689,527 @@
             }, 4000);
         }
 
-        function handleHeroDiagnose() {
-            const input = document.getElementById('hero-quick-input').value.trim();
-            if (!input) {
-                showCyberNotification("Silakan ketik keluhan laptop/komputer Anda terlebih dahulu.", "INFO DIAGNOSIS", "warning");
+        // =========================================================
+        // 8. CYBER_DIAGNOSTICS.v2 - AI COMPUTER & LAPTOP TECH ENGINE
+        // =========================================================
+        let aiVoiceEnabled = false;
+        let isAIProcessing = false;
+
+        const aiKnowledgeBase = [
+            {
+                id: "thermal",
+                category: "Termal & Kipas Pendingin",
+                keywords: ["panas", "overheat", "mati sendiri", "mati mendadak", "kipas bising", "fan bunyi", "suhu tinggi", "thermal throttling", "pasta kering", "heatsink", "fan ngebut", "cpu panas", "gpu panas", "suhu 90", "suhu 100"],
+                accuracy: "98.8%",
+                title: "Overheating CPU/GPU & Degenerasi Thermal Paste",
+                urgency: "TINGGI (Risiko Kerusakan Chipset/IC Motherboard)",
+                urgencyClass: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+                icon: "fa-fire-flame-curved text-amber-400",
+                summary: "Suhu operasional processor/GPU telah melampaui batas aman (thermal limit >90°C), memicu sistem emergency shutdown untuk mencegah terbakarnya silikon CPU. Penyebab utamanya adalah pasta termal pabrikan yang mengeras dan sirip heatsink tersumbat debu.",
+                diySteps: [
+                    "Segera hentikan pemakaian berat (game/rendering) saat body laptop sangat panas.",
+                    "Jangan gunakan laptop di atas kasur, karpet, atau permukaan kain.",
+                    "Gunakan cooling pad dengan aliran udara aktif untuk membantu ventilasi."
+                ],
+                solution: "Deep Cleaning Fan Heatsink + Penggantian Thermal Paste High-Performance (Arctic MX-4 / Thermal Grizzly / Honeywell PTM7950).",
+                estimateTime: "~45 - 60 Menit (Bisa Ditunggu)",
+                estimateCost: "Rp 100.000 - Rp 150.000",
+                recommendedTags: ["Thermal Repaste", "Deep Cleaning", "Fan Replacement", "Cooling Pad"]
+            },
+            {
+                id: "display",
+                category: "Display & Layar LCD",
+                keywords: ["layar blank", "layar hitam", "no display", "layar bergaris", "layar kedip", "flicker", "layar pecah", "layar gelap", "lcd garis", "no signal", "lampu nyala layar mati", "layar goyang", "fleksibel lcd", "ganti lcd"],
+                accuracy: "97.5%",
+                title: "Gangguan Jalur Sinyal eDP / Kerusakan Panel LCD",
+                urgency: "SEDANG - TINGGI",
+                urgencyClass: "text-red-400 bg-red-500/10 border-red-500/30",
+                icon: "fa-desktop text-red-400",
+                summary: "Lampu power dan kipas aktif namun layar gelap gulita (No Display) atau bergaris pelangi. Gejala ini mengindikasikan konektor pin RAM teroksidasi, kabel fleksibel eDP LCD terjepit/aus pada engsel, atau gate driver panel LCD rusak fisik.",
+                diySteps: [
+                    "Hubungkan laptop/PC ke TV atau monitor eksternal via kabel HDMI untuk memastikan mesin motherboard hidup.",
+                    "Lakukan hard reset: cabut charger, tahan tombol power 30 detik, lalu nyalakan kembali.",
+                    "Hindari menekan atau menekuk frame layar yang mengalami garis."
+                ],
+                solution: "Pemeriksaan jalur display lab, pembersihan pin kontak RAM, atau penggantian modul panel LCD original baru (IPS / 144Hz) bergaransi resmi.",
+                estimateTime: "~1 - 2 Jam (Panel Ready)",
+                estimateCost: "Mulai Rp 150.000 (servis fleksibel/RAM) s/d penggantian LCD baru",
+                recommendedTags: ["Ganti Panel LCD", "Servis Fleksibel", "Kalibrasi Warna", "HDMI Test"]
+            },
+            {
+                id: "bsod",
+                category: "Sistem & Blue Screen (BSOD)",
+                keywords: ["blue screen", "bsod", "layar biru", "memory_management", "critical_process", "page_fault", "kernel_data", "dpc_watchdog", "whea_uncorrectable", "system crash", "dump file", "nvlddmkm", "windows crash"],
+                accuracy: "96.9%",
+                title: "Kernel Crash & Integritas Driver / Memory BSOD",
+                urgency: "SEDANG (Risiko Kehilangan File Kerja)",
+                urgencyClass: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+                icon: "fa-triangle-exclamation text-cyan-400",
+                summary: "Windows mengalami kegagalan fatal pada kernel level yang memicu Blue Screen of Death (BSOD). Umumnya disebabkan oleh konflik update driver VGA, bad sector storage, atau blok memori RAM yang tidak stabil.",
+                diySteps: [
+                    "Catat kode error spesifik (seperti MEMORY_MANAGEMENT atau CRITICAL_PROCESS_DIED).",
+                    "Jalankan Terminal Command Prompt Administrator: ketik 'sfc /scannow' lalu tekan Enter.",
+                    "Booting ke Safe Mode untuk mencadangkan data penting ke drive eksternal."
+                ],
+                solution: "Analisis dump file crash di lab, pengujian kestabilan RAM (MemTest86), pembersihan malware & instalasi ulang Windows 11/10 Original terlisensi.",
+                estimateTime: "~1 - 2 Jam",
+                estimateCost: "Rp 100.000 - Rp 150.000",
+                recommendedTags: ["BSOD Fix", "SFC Scan", "Driver DDU Clean", "Windows 11 Pro"]
+            },
+            {
+                id: "keyboard",
+                category: "Keyboard & Peripheral Laptop",
+                keywords: ["keyboard", "tuts macet", "tombol tidak bisa", "ngetik sendiri", "ghost key", "tombol enter", "tombol spasi", "ketumpahan air", "ganti keyboard", "acer keyboard", "keyboard rusak", "tuts copot", "keyboard laptop"],
+                accuracy: "99.1%",
+                title: "Degradasi Jalur Karbon Flexboard / Kerusakan Modul Keyboard",
+                urgency: "SEDANG",
+                urgencyClass: "text-purple-400 bg-purple-500/10 border-purple-500/30",
+                icon: "fa-keyboard text-purple-400",
+                summary: "Tuts macet atau mengetik sendiri (ghost typing) disebabkan putusnya jalur mikro karbon di membran keyboard akibat kelembaban, debu pekat, atau korosi cairan. Modul keyboard laptop modern memerlukan penggantian unit presisi.",
+                diySteps: [
+                    "Gunakan On-Screen Keyboard di Windows (tekan Win + Ctrl + O) untuk kebutuhan darurat.",
+                    "Gunakan keyboard USB eksternal sementara waktu.",
+                    "Jangan mencongkel tuts secara paksa agar mekanisme scissor clip tidak patah."
+                ],
+                solution: "Penggantian 1 set modul keyboard baru original (seperti Acer Aspire E1-471, Lenovo IdeaPad, Asus TUF, HP) + pembersihan chassis palmrest + pengujian all-keys utility.",
+                estimateTime: "~45 - 90 Menit (Bisa Ditunggu)",
+                estimateCost: "Rp 150.000 - Rp 350.000 (Tergantung tipe tanam/frame)",
+                recommendedTags: ["Ganti Keyboard Original", "Chassis Clean", "All-Keys Tested", "Garansi Toko"]
+            },
+            {
+                id: "ssd",
+                category: "Storage, SSD & Optimasi Kecepatan",
+                keywords: ["lemot", "lambat", "upgrade ssd", "harddisk lemot", "disk 100%", "loading lama", "booting lama", "tambah ssd", "nvme", "m.2", "sata ssd", "ganti harddisk", "kingston nv2", "samsung evo", "pc lemot"],
+                accuracy: "99.4%",
+                title: "Bottleneck Kecepatan Harddisk (HDD) & Disk 100% Usage",
+                urgency: "RENDAH - SEDANG (Penurunan Produktivitas)",
+                urgencyClass: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+                icon: "fa-bolt-lightning text-emerald-400",
+                summary: "Windows 10/11 modern membutuhkan kecepatan read/write acak yang tinggi. Harddisk mekanik jadul hanya berkecepatan ~80-120 MB/s sehingga Task Manager selalu Disk 100%. Upgrade ke SSD M.2 NVMe (hingga 3.500 MB/s) akan meningkatkan kecepatan laptop hingga 15-20x lipat!",
+                diySteps: [
+                    "Buka Task Manager ➔ tab Performance ➔ Disk untuk melihat apakah disk konstan 100%.",
+                    "Nonaktifkan aplikasi startup berat di Task Manager tab 'Startup apps'.",
+                    "Pindahkan file berat ke drive sekunder untuk meringankan sistem."
+                ],
+                solution: "Upgrade ke SSD M.2 NVMe PCIe 4.0 / SSD SATA 2.5 (Kingston / Samsung) + Kloning OS tanpa hilang data + Optimalisasi Windows Super Fast.",
+                estimateTime: "~45 - 60 Menit (Bisa Ditunggu)",
+                estimateCost: "Rp 280.000 - Rp 1.250.000 (Sesuai kapasitas 256GB - 1TB)",
+                recommendedTags: ["SSD NVMe 512GB", "Booting 5 Detik", "Kloning Data Aman", "Optimasi Windows"]
+            },
+            {
+                id: "ram",
+                category: "RAM & Kinerja Multitasking",
+                keywords: ["tambah ram", "upgrade ram", "ram 4gb", "ram 8gb", "ram 16gb", "ram penuh", "lag saat multitasking", "buka chrome berat", "ddr4", "ddr5", "sodimm", "ram gaming", "ram laptop"],
+                accuracy: "98.2%",
+                title: "Kapasitas RAM Terbatas & Utilisasi Virtual Memory Penuh",
+                urgency: "RENDAH - SEDANG",
+                urgencyClass: "text-blue-400 bg-blue-500/10 border-blue-500/30",
+                icon: "fa-memory text-blue-400",
+                summary: "RAM 4GB atau 8GB single-channel tidak lagi cukup untuk membuka puluhan tab browser, aplikasi Office, dan game modern secara simultan. Penambahan RAM dual-channel (16GB) melipatgandakan bus width memori (128-bit) dan mendongkrak performa hingga +40%.",
+                diySteps: [
+                    "Cek ketersediaan slot RAM via Task Manager ➔ tab Performance ➔ Memory.",
+                    "Tutup background apps yang tidak terpakai.",
+                    "Pilih frekuensi RAM (contoh: 3200MHz DDR4) yang identik untuk mode Dual-Channel optimal."
+                ],
+                solution: "Upgrade RAM DDR4/DDR5 SODIMM Laptop & PC Desktop bergaransi resmi seumur hidup (Kingston Fury / Corsair / Teamgroup).",
+                estimateTime: "~20 - 30 Menit (Bisa Ditunggu)",
+                estimateCost: "Mulai Rp 180.000 (4GB) / Rp 340.000 (8GB) / Rp 620.000 (16GB)",
+                recommendedTags: ["RAM Dual Channel", "DDR4 3200MHz", "DDR5 5600MHz", "Garansi Lifetime"]
+            },
+            {
+                id: "power",
+                category: "Power, Baterai & Mati Total",
+                keywords: ["mati total", "matot", "tidak bisa dicas", "baterai drop", "baterai bocor", "plugged in not charging", "charger panas", "colok cas lampu mati", "bau hangus", "konslet", "short circuit", "motherboard short"],
+                accuracy: "97.8%",
+                title: "Short Circuit Jalur Utama 19V / Kerusakan IC Charging & Baterai",
+                urgency: "KRITIS (Wajib Penanganan Khusus Lab)",
+                urgencyClass: "text-red-500 bg-red-500/10 border-red-500/40",
+                icon: "fa-bolt text-red-500",
+                summary: "Laptop mati total atau lampu charger mati saat dicolokkan menandakan adanya short circuit pada kapasitor primer 19V VIN / MOSFET power motherboard atau kerusakan sel baterai lithium.",
+                diySteps: [
+                    "Segera cabut charger jika tercium bau terbakar atau adaptor sangat panas.",
+                    "Jangan mencoba menyalakan berulang kali saat terjadi konslet untuk mencegah jalur PCB terbakar.",
+                    "Gunakan adaptor charger original dengan voltase dan ampere yang sesuai."
+                ],
+                solution: "Tracing skematik motherboard digital, injeksi voltase thermal camera untuk isolasi komponen short, pergantian MOSFET/IC Power original, atau pergantian baterai baru bergaransi.",
+                estimateTime: "~1 - 3 Hari (Motherboard) / 30 Menit (Ganti Baterai)",
+                estimateCost: "Rp 250.000 - Rp 650.000 (Tergantung tingkat kerusakan)",
+                recommendedTags: ["Servis Motherboard", "Tracing Skematik", "Ganti Baterai Original", "Garansi Servis"]
+            },
+            {
+                id: "build",
+                category: "Rakit PC & Konsultasi Spesifikasi",
+                keywords: ["rakit pc", "spesifikasi pc", "budget rakit", "intel vs amd", "rtx 3060", "rtx 4060", "ryzen 5", "core i5", "pc gaming", "pc editing", "psu berapa watt", "bottleneck", "rekomendasi pc", "komputer kantor"],
+                accuracy: "99.0%",
+                title: "Konsultasi Rancang Bangun Custom PC Desktop 2026",
+                urgency: "KONSULTASI SPESIFIKASI & PERAKITAN",
+                urgencyClass: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+                icon: "fa-computer text-cyan-400",
+                summary: "Perakitan PC custom membutuhkan sinergi yang pas antara CPU, GPU, Motherboard, RAM, dan Power Supply (PSU) bersertifikasi 80+ agar tidak terjadi bottleneck performa dan suhu tetap adem saat beban komputasi maksimal.",
+                diySteps: [
+                    "Tentukan fokus utama PC: Gaming eSports, Editing Video 4K, 3D Rendering, atau Office Multi-Display.",
+                    "Gunakan Power Supply berkualitas minimal 80+ Bronze untuk perlindungan komponen.",
+                    "Pilih casing dengan airflow mesh depan untuk sirkulasi udara dingin yang prima."
+                ],
+                solution: "Jasa perakitan custom PC profesional Istana Techno: manajemen kabel rapi estetik, thermal repaste berkualitas, instalasi OS Windows 11 Pro + software lengkap, stress-test 100% lulus uji sebelum serah terima.",
+                estimateTime: "~1 Hari Kerja",
+                estimateCost: "Mulai Rp 150.000 (Jasa Rakit + Free Install OS & Game/Software)",
+                recommendedTags: ["Rakit PC Gaming", "Cable Management", "Stress Test 24H", "Part Original 100%"]
+            },
+            {
+                id: "virus",
+                category: "Virus, Malware & Instalasi Software",
+                keywords: ["virus", "malware", "ransomware", "iklan muncul terus", "windows corrupt", "install ulang", "aktivasi", "windows 11", "windows 10", "format laptop", "data hilang", "backup", "office tidak bisa dibuka", "instalasi"],
+                accuracy: "97.0%",
+                title: "Pembersihan Malware / Instalasi Ulang Sistem Operasi",
+                urgency: "SEDANG",
+                urgencyClass: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30",
+                icon: "fa-shield-virus text-yellow-400",
+                summary: "Infeksi malware, trojan kripto, atau adware yang menyuntikkan iklan menguras sumber daya CPU/RAM dan membahayakan privasi data. Instalasi ulang bersih (Clean Install) dengan image Windows resmi adalah solusi paling tuntas dan aman.",
+                diySteps: [
+                    "Putuskan koneksi internet jika mencurigai ada aktivitas ransomware / pencurian data.",
+                    "Jangan masukkan flashdisk pribadi ke komputer lain sebelum dipindai antivirus.",
+                    "Gunakan Windows Defender dengan update definisi virus terbaru."
+                ],
+                solution: "Pembersihan virus tuntas, backup file aman, instalasi Windows 11/10 Pro Original teraktivasi + Paket Software Komplit (MS Office, PDF, Antivirus, Browser, Multimedia, Desain).",
+                estimateTime: "~1 - 2 Jam (Bisa Ditunggu)",
+                estimateCost: "Rp 100.000 - Rp 150.000",
+                recommendedTags: ["Install Ulang Windows", "Backup Data Aman", "Software Lengkap", "Bebas Virus"]
+            }
+        ];
+
+        function initAIChat() {
+            const container = document.getElementById('ai-chat-messages');
+            if (!container) return;
+            container.innerHTML = `
+                <div class="flex items-start gap-2.5 ai-msg-enter">
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-cyan p-0.5 shrink-0 shadow-lg">
+                        <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center text-cyber-cyan text-xs font-black">
+                            <i class="fa-solid fa-brain text-[11px]"></i>
+                        </div>
+                    </div>
+                    <div class="bg-cyber-card/90 border border-cyber-cyan/40 text-slate-200 p-3 sm:p-3.5 rounded-2xl rounded-tl-none max-w-[92%] space-y-2 shadow-lg">
+                        <div class="flex items-center justify-between text-[10px] text-cyber-cyan font-orbitron">
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-robot"></i> CYBER_DIAGNOSTICS AI</span>
+                            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded font-mono">READY v2.6</span>
+                        </div>
+                        <p class="leading-relaxed text-xs">
+                            Halo! Saya <strong class="text-white">AI Diagnostic Assistant Istana Techno</strong>. Ketik keluhan/kendala laptop & komputer Anda (seperti <span class="text-cyber-cyan font-semibold">overheating, layar blank, BSOD, tuts keyboard macet, lemot, upgrade SSD/RAM, atau rakit PC</span>). Saya siap menganalisis penyebab, estimasi biaya, dan solusinya secara instan!
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateAIDiagnosis(query) {
+            const normalized = query.toLowerCase();
+
+            // Check General Greeting / Info Questions
+            if (/^(halo|hai|assalamualaikum|pagi|siang|malam|tes|info|buka|lokasi|siapa)/i.test(normalized.trim())) {
+                return {
+                    title: "Informasi & Layanan Resmi Istana Techno",
+                    accuracy: "99.9%",
+                    category: "Layanan & Konsultasi",
+                    urgency: "INFORMASI TEKNIS",
+                    urgencyClass: "text-cyber-cyan bg-cyan-500/10 border-cyan-500/30",
+                    icon: "fa-circle-info text-cyber-cyan",
+                    summary: "Istana Techno adalah pusat perbaikan komputer, laptop, dan penjualan sparepart original bergaransi di Siak. Kami melayani perbaikan hardware (motherboard, layar, keyboard, engsel), pembersihan overheat, instalasi OS, dan perakitan PC custom.",
+                    diySteps: [
+                        "Buka: Senin - Sabtu (09:00 - 18:00 WIB).",
+                        "Alamat Lab: Siak Sri Indrapura, Riau.",
+                        "Konsultasi Online & Booking: Aktif 24 Jam via WhatsApp."
+                    ],
+                    solution: "Silakan ketik kendala spesifik laptop/PC Anda di kolom input di bawah untuk analisis diagnosa kerusakan otomatis!",
+                    estimateTime: "Konsultasi Instan",
+                    estimateCost: "Diagnosis Awal Gratis",
+                    recommendedTags: ["Spare Part Original", "Servis Cepat", "Teknisi Ahli", "Garansi Toko"]
+                };
+            }
+
+            // Keyword match scoring
+            let bestMatch = null;
+            let highestScore = 0;
+
+            aiKnowledgeBase.forEach(item => {
+                let score = 0;
+                item.keywords.forEach(kw => {
+                    if (normalized.includes(kw)) {
+                        score += kw.length >= 6 ? 3 : 1.5;
+                    }
+                });
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestMatch = item;
+                }
+            });
+
+            if (bestMatch && highestScore >= 1.5) {
+                return bestMatch;
+            }
+
+            // Fallback Dynamic AI Diagnosis based on generic symptoms
+            return {
+                title: "Analisis Diagnosa Gejala Hardware & Sistem: " + query.substring(0, 35) + (query.length > 35 ? "..." : ""),
+                accuracy: "95.4%",
+                category: "Hardware & Multi-System Check",
+                urgency: "SEDANG (Disarankan Pemeriksaan Lanjut)",
+                urgencyClass: "text-purple-400 bg-purple-500/10 border-purple-500/30",
+                icon: "fa-microchip text-purple-400",
+                summary: `Berdasarkan analisis gejala "${query}", sistem mendeteksi kemungkinan anomali pada kestabilan komponen hardware, file registry sistem, atau suhu operasional. Pemeriksaan multimeter & tegangan lab diperlukan untuk diagnosis 100% presisi.`,
+                diySteps: [
+                    "Restart perangkat dan amati apakah muncul kode error, bunyi beep, atau lampu indikator berkedip.",
+                    "Lepaskan semua perangkat USB eksternal yang tidak diperlukan.",
+                    "Pastikan adaptor charger memberikan daya yang stabil tanpa lonjakan voltase."
+                ],
+                solution: "Pemeriksaan komprehensif di Lab Servis Istana Techno (Gratis biaya diagnosis awal) dengan teknisi bersertifikasi.",
+                estimateTime: "~30 - 60 Menit",
+                estimateCost: "Diagnosis Awal Gratis",
+                recommendedTags: ["Diagnosis Lab", "Hardware Check", "Konsultasi Teknisi", "Garansi Servis"]
+            };
+        }
+
+        function handleAIChatSubmit(event) {
+            if (event) event.preventDefault();
+            if (isAIProcessing) return;
+
+            const inputEl = document.getElementById('hero-quick-input');
+            const query = inputEl.value.trim();
+
+            if (!query) {
+                showCyberNotification("Silakan ketik keluhan laptop/komputer Anda terlebih dahulu.", "DIAGNOSIS AI", "warning");
                 return;
             }
 
-            const targetMsg = `Halo Istana Techno, laptop/komputer saya mengalami kendala: "${input}". Mohon info estimasi perbaikan.`;
-            window.open(`https://wa.me/6282297288018?text=${encodeURIComponent(targetMsg)}`, '_blank');
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            const thinkingEl = document.getElementById('ai-thinking-indicator');
+
+            // 1. Append User Message
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = "flex items-start gap-2.5 justify-end ai-msg-enter";
+            userMsgDiv.innerHTML = `
+                <div class="bg-cyber-purple/40 border border-cyber-purple/60 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-md">
+                    <p class="font-medium text-xs sm:text-sm">${escapeHTML(query)}</p>
+                </div>
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-cyber-purple flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-lg">
+                    <i class="fa-solid fa-user text-[11px]"></i>
+                </div>
+            `;
+            messagesContainer.appendChild(userMsgDiv);
+            inputEl.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // 2. Show Thinking
+            isAIProcessing = true;
+            thinkingEl.classList.remove('hidden');
+
+            setTimeout(() => {
+                const diagnosis = generateAIDiagnosis(query);
+                thinkingEl.classList.add('hidden');
+                isAIProcessing = false;
+
+                // 3. Render AI Response Card
+                const aiMsgDiv = document.createElement('div');
+                aiMsgDiv.className = "flex items-start gap-2.5 ai-msg-enter";
+
+                const diyListHTML = (diagnosis.diySteps || []).map(step =>
+                    `<li class="text-slate-300 flex items-start gap-1.5"><i class="fa-solid fa-chevron-right text-cyber-cyan text-[9px] mt-1 shrink-0"></i><span>${step}</span></li>`
+                ).join('');
+
+                const tagsHTML = (diagnosis.recommendedTags || []).map(tag =>
+                    `<span class="bg-cyber-bg border border-cyber-purple/40 text-cyber-purpleLight px-2 py-0.5 rounded text-[9px] font-mono">${tag}</span>`
+                ).join(' ');
+
+                const waMessage = encodeURIComponent(
+                    `Halo Istana Techno Siak,\nSaya ingin konsultasi hasil diagnosis AI CYBER_DIAGNOSTICS.v2:\n\n` +
+                    `📌 Keluhan: "${query}"\n` +
+                    `🔍 Hasil Analisis: ${diagnosis.title}\n` +
+                    `🛠️ Solusi Rekomendasi: ${diagnosis.solution}\n` +
+                    `⏱️ Estimasi: ${diagnosis.estimateTime} (${diagnosis.estimateCost})\n\n` +
+                    `Apakah teknisi siap untuk pengecekan / servis?`
+                );
+
+                aiMsgDiv.innerHTML = `
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-cyan p-0.5 shrink-0 shadow-lg">
+                        <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center text-cyber-cyan text-xs font-black">
+                            <i class="fa-solid fa-microchip text-[11px]"></i>
+                        </div>
+                    </div>
+                    <div class="bg-cyber-card border border-cyber-cyan/35 text-slate-200 p-3.5 sm:p-4 rounded-2xl rounded-tl-none max-w-[92%] space-y-3 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between flex-wrap gap-1 border-b border-cyber-cardBorder pb-2 text-[10px] font-orbitron">
+                            <span class="text-cyber-cyan flex items-center gap-1.5">
+                                <i class="fa-solid ${diagnosis.icon}"></i> ${diagnosis.category}
+                            </span>
+                            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded font-mono">
+                                Akurasi ${diagnosis.accuracy}
+                            </span>
+                        </div>
+
+                        <!-- Main Title & Urgency -->
+                        <div>
+                            <h4 class="font-orbitron font-bold text-xs sm:text-sm text-white leading-tight">${diagnosis.title}</h4>
+                            <div class="mt-1">
+                                <span class="inline-block border px-2 py-0.5 rounded text-[9px] font-mono uppercase font-bold ${diagnosis.urgencyClass}">
+                                    ${diagnosis.urgency}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">${diagnosis.summary}</p>
+
+                        <!-- DIY Steps -->
+                        <div class="bg-cyber-bg/70 p-2.5 rounded-xl border border-cyber-cardBorder space-y-1.5 text-xs">
+                            <div class="text-cyber-cyan font-bold font-orbitron text-[10px] uppercase flex items-center gap-1">
+                                <i class="fa-solid fa-wrench text-cyber-pink"></i> Langkah Penanganan Awal:
+                            </div>
+                            <ul class="space-y-1 pl-0.5 text-[11px]">
+                                ${diyListHTML}
+                            </ul>
+                        </div>
+
+                        <!-- Service Recommendation -->
+                        <div class="bg-gradient-to-r from-cyber-purple/20 to-cyber-cyan/10 p-2.5 rounded-xl border border-cyber-purple/40 text-xs space-y-1">
+                            <div class="text-cyber-purpleLight font-bold font-orbitron text-[10px] uppercase">
+                                Rekomendasi Solusi Istana Techno:
+                            </div>
+                            <div class="text-white text-[11px]">${diagnosis.solution}</div>
+                            <div class="flex items-center justify-between text-[10px] font-mono pt-1 text-emerald-400 border-t border-cyber-purple/20 mt-1">
+                                <span><i class="fa-solid fa-clock mr-1"></i> ${diagnosis.estimateTime}</span>
+                                <span><i class="fa-solid fa-tag mr-1"></i> ${diagnosis.estimateCost}</span>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="flex flex-wrap items-center gap-1 pt-0.5">
+                            ${tagsHTML}
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="pt-2 border-t border-cyber-cardBorder/60 flex flex-wrap items-center justify-between gap-2">
+                            <button onclick="copyAIDiagnosis(this, '${escapeQuotes(diagnosis.title + ' - ' + diagnosis.solution)}')"
+                                class="text-[10px] font-orbitron text-slate-400 hover:text-white transition flex items-center gap-1 py-1 px-2 rounded hover:bg-cyber-purple/20">
+                                <i class="fa-solid fa-copy text-cyber-cyan"></i> Salin Diagnosa
+                            </button>
+                            <a href="https://wa.me/6282297288018?text=${waMessage}" target="_blank"
+                                class="cyber-btn px-3.5 py-1.5 rounded-lg font-orbitron text-[10px] font-bold text-white flex items-center gap-1.5 shadow-md">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i> Hubungi Teknisi Lab
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                messagesContainer.appendChild(aiMsgDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                // Speech synthesis if enabled
+                if (aiVoiceEnabled) {
+                    speakAIText(diagnosis.title + ". " + diagnosis.summary);
+                }
+
+            }, 450);
+        }
+
+        function askAIPrompt(promptText) {
+            const inputEl = document.getElementById('hero-quick-input');
+            inputEl.value = promptText;
+            handleAIChatSubmit(null);
+        }
+
+        function resetAIChat() {
+            initAIChat();
+            showCyberNotification("Diagnosa AI diatur ulang ke kondisi awal.", "RESET DIAGNOSA", "success");
+        }
+
+        function toggleAIVoice() {
+            aiVoiceEnabled = !aiVoiceEnabled;
+            const icon = document.getElementById('ai-voice-icon');
+            const btn = document.getElementById('ai-voice-toggle-btn');
+            if (aiVoiceEnabled) {
+                icon.className = "fa-solid fa-volume-high text-cyber-cyan animate-pulse";
+                btn.classList.add('text-cyber-cyan');
+                showCyberNotification("Fitur pembacaan suara AI diaktifkan!", "SUARA AI AKTIF", "success");
+                speakAIText("Fitur suara AI diaktifkan.");
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-slate-500";
+                btn.classList.remove('text-cyber-cyan');
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+                showCyberNotification("Fitur suara AI dinonaktifkan.", "SUARA AI OFF", "warning");
+            }
+        }
+
+        function speakAIText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID';
+            utterance.rate = 1.05;
+            utterance.pitch = 1.0;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function startVoiceInput() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const micBtn = document.getElementById('ai-mic-btn');
+
+            if (!SpeechRec) {
+                showCyberNotification("Browser ini belum mendukung Web Speech Recognition. Silakan gunakan ketik teks.", "MIC TIDAK DIDUKUNG", "warning");
+                return;
+            }
+
+            try {
+                const recognition = new SpeechRec();
+                recognition.lang = 'id-ID';
+                recognition.interimResults = false;
+
+                micBtn.innerHTML = `<i class="fa-solid fa-microphone-lines text-cyber-pink animate-ping text-xs"></i>`;
+                showCyberNotification("Mendengarkan suara Anda... Silakan sebutkan keluhan laptop.", "MENDENGARKAN", "success");
+
+                recognition.onresult = (event) => {
+                    const speechResult = event.results[0][0].transcript;
+                    document.getElementById('hero-quick-input').value = speechResult;
+                    micBtn.innerHTML = `<i class="fa-solid fa-microphone text-xs"></i>`;
+                    handleAIChatSubmit(null);
+                };
+
+                recognition.onerror = () => {
+                    micBtn.innerHTML = `<i class="fa-solid fa-microphone text-xs"></i>`;
+                    showCyberNotification("Gagal merekam suara atau izin mikrofon diblokir.", "REKAM GAGAL", "error");
+                };
+
+                recognition.onend = () => {
+                    micBtn.innerHTML = `<i class="fa-solid fa-microphone text-xs"></i>`;
+                };
+
+                recognition.start();
+            } catch (e) {
+                console.warn(e);
+                micBtn.innerHTML = `<i class="fa-solid fa-microphone text-xs"></i>`;
+            }
+        }
+
+        function copyAIDiagnosis(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCyberNotification("Laporan diagnosa AI berhasil disalin ke clipboard!", "DISALIN", "success");
+            }).catch(() => {
+                showCyberNotification(text, "DETAIL LAPORAN", "success");
+            });
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g,
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
         }
 
         function toggleMobileMenu() {
@@ -1650,6 +2221,9 @@
         document.getElementById('mobile-music-btn').addEventListener('click', () => {
             document.getElementById('music-player-container').scrollIntoView({ behavior: 'smooth' });
         });
+
+        // Initialize AI Diagnostics Chat on Load
+        initAIChat();
     </script>
 </body>
 
