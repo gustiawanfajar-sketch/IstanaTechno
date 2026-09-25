@@ -912,6 +912,38 @@
         // ==========================================
         const projectsData = [
             {
+                id: 22,
+                title: "Perbaikan Speaker Laptop Lenovo - Suara Cempreng Kembali Normal & Jernih",
+                category: "Servis & Hardware",
+                rawCategory: "servisHardware",
+                hasVideo: true,
+                image: "./lenovo-ideapad3-performance-optim.jpg",
+                images: [
+                    "./proyek/speakerlenovo.mp4",
+                    "./lenovo-ideapad3-performance-optim.jpg",
+                    "./lenovo-ideapad3-fan-cleaning.jpg",
+                    "./lenovo-ideapad3-health-check.jpg"
+                ],
+                imageCaptions: [
+                    "Video Dokumentasi Servis: Speaker Laptop Lenovo Suara Cempreng Tuntas Diperbaiki, Normal & Jernih Kembali",
+                    "Dokumentasi Unit Laptop Lenovo: Selesai Pengerjaan Modul Internal Speaker Baru & Siap Digunakan",
+                    "Deep Cleaning Kipas Heatsink: Pembersihan Debu Pekat & Penggantian Thermal Paste Baru",
+                    "Uji Integritas Windows & SSD: Sistem Dingin, Performa Ngebut & Komponen 100% Prima"
+                ],
+                description: `Speaker laptop Lenovo Anda mendadak cempreng atau suaranya samar-samar? Tenang, di ISTANA TECHNO Siak semua ada solusinya! Unit Lenovo ini baru saja tuntas diservis dan speakernya kembali normal, jernih, serta siap diajak kerja maupun hiburan.
+
+Konsultasi & perbaikan hubungi:
+📲 WA: 0852-4942-3056
+🌐 Web: https://istana-techno12.vercel.app/
+📷 IG: @gustiawan_ulfahmi
+
+[#serviskomputersiak](https://www.tiktok.com/tag/serviskomputersiak) [#servislaptopsiak](https://www.tiktok.com/tag/servislaptopsiak) [#servispcsiak](https://www.tiktok.com/tag/servispcsiak) [#servisaiopcsiak](https://www.tiktok.com/tag/servisaiopcsiak) [#istana_techno](https://www.tiktok.com/tag/istana_techno)`,
+                link: "https://wa.me/6285249423056?text=Halo%20Istana%20Techno%2C%20saya%20mau%20konsultasi%20servis%20speaker%20laptop%20Lenovo",
+                tech: ["Lenovo Laptop", "Video Servis HD", "Ganti Speaker Internal", "Suara Normal & Jernih", "Optimalisasi Sistem", "Garansi Servis"],
+                status: "SELESAI & SUARA JERNIH",
+                isLocked: false
+            },
+            {
                 id: 21,
                 title: "Perbaikan & Pergantian Keyboard Laptop Acer Aspire E1-471",
                 category: "Servis & Hardware",
@@ -934,7 +966,7 @@
             },
             {
                 id: 19,
-                title: "Optimalisasi OS Windows & Pergantian Speaker Laptop Lenovo IdeaPad Slim 3",
+                title: "Optimalisasi Sistem Windows & Deep Cleaning Fan Lenovo IdeaPad Slim 3",
                 category: "Servis & Hardware",
                 rawCategory: "servisHardware",
                 image: "./lenovo-ideapad3-performance-optim.jpg",
@@ -1211,7 +1243,7 @@
                                 ${project.title}
                             </h3>
                             <p class="text-cyber-muted text-xs leading-relaxed line-clamp-2 font-sans">
-                                ${project.description}
+                                ${project.description.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')}
                             </p>
 
                             <!-- Tech Stack Pills -->
@@ -1425,7 +1457,23 @@
             document.getElementById('modal-title').innerText = project.title;
             document.getElementById('modal-category-badge').innerText = project.category;
             document.getElementById('modal-status-badge').innerText = project.status;
-            document.getElementById('modal-desc').innerText = project.description;
+
+            // Render Description with rich formatting (markdown links, URLs, WhatsApp, IG)
+            const descEl = document.getElementById('modal-desc');
+            if (descEl) {
+                let formatted = (project.description || '')
+                    // Markdown links: [#hashtag](url) or [label](url)
+                    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-cyber-cyan hover:text-cyber-pink underline transition font-medium inline-flex items-center gap-1">$1 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>')
+                    // Plain URLs (not preceded by href=")
+                    .replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer" class="text-cyber-cyan hover:text-cyber-pink underline transition font-medium inline-flex items-center gap-1">$2 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>')
+                    // Instagram handles @username
+                    .replace(/@([a-zA-Z0-9_.]+)/g, '<a href="https://instagram.com/$1" target="_blank" rel="noopener noreferrer" class="text-cyber-pink hover:text-cyber-cyan underline transition font-medium">@$1</a>')
+                    // Clickable WhatsApp number
+                    .replace(/WA:\s*([0-9\-]+)/g, 'WA: <a href="https://wa.me/6285249423056" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 underline transition font-medium">$1</a>')
+                    // Newlines to <br>
+                    .replace(/\n/g, '<br>');
+                descEl.innerHTML = formatted;
+            }
 
             // Load Carousel Images & Captions
             modalActiveImages = (project.images && project.images.length > 0) ? project.images : [project.image];
