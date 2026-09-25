@@ -917,18 +917,12 @@
                 category: "Servis & Hardware",
                 rawCategory: "servisHardware",
                 hasVideo: true,
-                image: "./lenovo-ideapad3-performance-optim.jpg",
+                image: "./speakerlenovo-poster.jpg",
                 images: [
-                    "./proyek/speakerlenovo.mp4",
-                    "./lenovo-ideapad3-performance-optim.jpg",
-                    "./lenovo-ideapad3-fan-cleaning.jpg",
-                    "./lenovo-ideapad3-health-check.jpg"
+                    "./proyek/speakerlenovo.mp4"
                 ],
                 imageCaptions: [
-                    "Video Dokumentasi Servis: Speaker Laptop Lenovo Suara Cempreng Tuntas Diperbaiki, Normal & Jernih Kembali",
-                    "Dokumentasi Unit Laptop Lenovo: Selesai Pengerjaan Modul Internal Speaker Baru & Siap Digunakan",
-                    "Deep Cleaning Kipas Heatsink: Pembersihan Debu Pekat & Penggantian Thermal Paste Baru",
-                    "Uji Integritas Windows & SSD: Sistem Dingin, Performa Ngebut & Komponen 100% Prima"
+                    "Video Dokumentasi Servis: Speaker Laptop Lenovo Suara Cempreng Tuntas Diperbaiki, Normal & Jernih Kembali"
                 ],
                 description: `Speaker laptop Lenovo Anda mendadak cempreng atau suaranya samar-samar? Tenang, di ISTANA TECHNO Siak semua ada solusinya! Unit Lenovo ini baru saja tuntas diservis dan speakernya kembali normal, jernih, serta siap diajak kerja maupun hiburan.
 
@@ -1344,7 +1338,14 @@ Konsultasi & perbaikan hubungi:
                         if (currentOpenProject && currentOpenProject.image) {
                             modalVideo.poster = currentOpenProject.image;
                         }
+                        modalVideo.load();
                     }
+                    modalVideo.onerror = () => {
+                        if (modalVideo.src.includes('proyek/speakerlenovo.mp4')) {
+                            modalVideo.src = './speakerlenovo.mp4';
+                            modalVideo.load();
+                        }
+                    };
                 }
                 if (topCounter) {
                     topCounter.innerHTML = `<i class="fa-solid fa-circle-play text-pink-400 animate-pulse"></i> <span id="slider-counter-label">Video Dokumentasi (${modalCurrentSlide + 1}/${modalActiveImages.length})</span>`;
